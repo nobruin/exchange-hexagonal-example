@@ -13,7 +13,7 @@ class ExchangeApiGateway(
     override fun findRates(fromCurrency: String, toCurrency: String): ExchangeResult
         = runCatching {
             Fuel.get(
-                properties.uri + "/latest",
+                properties.uri + ROUTE,
                 listOf(ACCESS_KEY to properties.secret, SYMBOLS to "${fromCurrency},${toCurrency}")
             ).responseObject<ExchangeResult>().third.get()
         }.onFailure {
@@ -23,5 +23,6 @@ class ExchangeApiGateway(
     companion object{
         const val ACCESS_KEY = "access_key"
         const val SYMBOLS = "symbols"
+        const val ROUTE = "/latest"
     }
 }
