@@ -11,20 +11,18 @@ class ExchangeUseCaseImpl(
     private val exchangeRepository: ExchangeRepository
 ): ExchangeUseCase {
     override fun convertCurrency(amount: BigDecimal, fromCurrency: String, toCurrency: String): BigDecimal {
-        // get rates
         val exchangeResult = exchangeGateway.findRates(fromCurrency, toCurrency)
-        //calculate
+
         val rateConversion =
             calculateConversionRate(exchangeResult.rates[fromCurrency], exchangeResult.rates[toCurrency])
         val result = calculateAmount(amount, rateConversion)
-        //save
+
         exchangeRepository.save(Exchange(
             amount = amount,
             fromCurrency = fromCurrency,
             toCurrency = toCurrency,
             result = result
         ))
-        // return
         return result
     }
 
