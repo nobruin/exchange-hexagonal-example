@@ -4,6 +4,7 @@ import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.gson.responseObject
 import jaya.tech.exchange.adapters.output.external.exchangeapi.ExchangeGateway
 import jaya.tech.exchange.adapters.output.external.exchangeapi.entities.ExchangeResult
+import jaya.tech.exchange.application.configuration.ExchangeApiProperties
 
 
 class ExchangeApiGateway(
