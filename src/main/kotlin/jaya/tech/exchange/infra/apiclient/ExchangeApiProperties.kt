@@ -1,4 +1,4 @@
-package jaya.tech.exchange.application.configuration
+package jaya.tech.exchange.infra.apiclient
 
 class ExchangeApiProperties {
     lateinit var uri: String

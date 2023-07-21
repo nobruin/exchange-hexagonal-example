@@ -1,4 +1,4 @@
-package jaya.tech.exchange.application.usecases
+package jaya.tech.exchange.application.usecases.exchange
 
 import jaya.tech.exchange.adapters.output.external.exchangeapi.ExchangeGateway
 import jaya.tech.exchange.adapters.output.persistence.repositories.ExchangeRepository
@@ -6,11 +6,11 @@ import jaya.tech.exchange.domain.Exchange
 import java.lang.RuntimeException
 import java.math.BigDecimal
 
-class ExchangeUseCaseImpl(
+class ConvertCurrencyUseCaseImpl(
     private val exchangeGateway: ExchangeGateway,
     private val exchangeRepository: ExchangeRepository
-): ExchangeUseCase {
-    override fun convertCurrency(amount: BigDecimal, fromCurrency: String, toCurrency: String): BigDecimal {
+): ConvertCurrencyUseCase {
+    override fun execute(amount: BigDecimal, fromCurrency: String, toCurrency: String): BigDecimal {
         val exchangeResult = exchangeGateway.findRates(fromCurrency, toCurrency)
 
         val rateConversion =

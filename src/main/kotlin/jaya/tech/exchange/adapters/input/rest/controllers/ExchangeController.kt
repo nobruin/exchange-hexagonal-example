@@ -2,11 +2,12 @@ package jaya.tech.exchange.adapters.input.rest.controllers
 
 import jaya.tech.exchange.adapters.input.rest.dtos.ExchangeRequest
 import jaya.tech.exchange.adapters.input.rest.dtos.ExchangeResponse
-import jaya.tech.exchange.application.usecases.ExchangeUseCase
+import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCase
 
-class ExchangeController(private val exchangeUseCase: ExchangeUseCase) {
+class ExchangeController(private val convertCurrencyUseCase: ConvertCurrencyUseCase) {
     fun exchange(request: ExchangeRequest): ExchangeResponse {
-        val result = exchangeUseCase.convertCurrency(request.amount, request.fromCurrency, request.toCurrency)
+        //TODO: jwtService
+        val result = convertCurrencyUseCase.execute(request.amount, request.fromCurrency, request.toCurrency)
         return ExchangeResponse(result)
     }
 }
