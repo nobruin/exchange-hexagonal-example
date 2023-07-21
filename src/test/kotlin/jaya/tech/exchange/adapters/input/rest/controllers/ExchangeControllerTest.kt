@@ -9,7 +9,7 @@ import kotlin.test.Test
 
 class ExchangeControllerTest {
     @Test
-    fun `Test exchange API endpoint`() {
+    fun `Test conversion API endpoint`() {
         val convertCurrencyUseCase = mockk<ConvertCurrencyUseCase>()
         val controller = ExchangeController(convertCurrencyUseCase)
 
