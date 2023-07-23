@@ -3,6 +3,7 @@ package jaya.tech.exchange.application.usecases.user
 import jaya.tech.exchange.adapters.output.persistence.entities.UserModel
 import jaya.tech.exchange.adapters.output.persistence.repositories.UserRepository
 import jaya.tech.exchange.domain.User
+import jaya.tech.exchange.domain.toEntity
 
 class CreateUserUseCaseIMpl(private val userRepository: UserRepository): CreateUserUseCase{
 

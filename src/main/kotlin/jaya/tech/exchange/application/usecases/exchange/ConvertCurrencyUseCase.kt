@@ -1,7 +1,8 @@
 package jaya.tech.exchange.application.usecases.exchange
 
+import jaya.tech.exchange.adapters.input.rest.dtos.ExchangeResponse
 import java.math.BigDecimal
 
 interface ConvertCurrencyUseCase {
-    fun execute(amount: BigDecimal, fromCurrency: String, toCurrency: String): BigDecimal
+    fun execute(amount: BigDecimal, fromCurrency: String, toCurrency: String, userId: Long): ExchangeResponse
 }

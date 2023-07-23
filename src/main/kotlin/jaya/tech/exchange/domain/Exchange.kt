@@ -4,6 +4,7 @@ import java.math.BigDecimal
 
 data class Exchange(
     val id: Long? = null,
+    val userId: Long? = null,
     val amount: BigDecimal,
     val fromCurrency: String,
     val toCurrency: String,

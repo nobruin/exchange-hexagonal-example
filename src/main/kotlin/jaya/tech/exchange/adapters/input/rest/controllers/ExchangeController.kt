@@ -7,7 +7,11 @@ import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCase
 class ExchangeController(private val convertCurrencyUseCase: ConvertCurrencyUseCase) {
     fun exchange(request: ExchangeRequest): ExchangeResponse {
         //TODO: jwtService
-        val result = convertCurrencyUseCase.execute(request.amount, request.fromCurrency, request.toCurrency)
-        return ExchangeResponse(result)
+        return convertCurrencyUseCase.execute(
+            request.amount,
+            request.fromCurrency,
+            request.toCurrency,
+            request.userId
+        )
     }
 }

@@ -1,5 +1,7 @@
 package jaya.tech.exchange.application.usecases.exchange
 
+import jaya.tech.exchange.adapters.input.rest.dtos.ExchangeResponse
+import jaya.tech.exchange.adapters.input.rest.dtos.toExchangeResponse
 import jaya.tech.exchange.adapters.output.external.exchangeapi.ExchangeGateway
 import jaya.tech.exchange.adapters.output.persistence.repositories.ExchangeRepository
 import jaya.tech.exchange.domain.Exchange
@@ -10,20 +12,21 @@ class ConvertCurrencyUseCaseImpl(
     private val exchangeGateway: ExchangeGateway,
     private val exchangeRepository: ExchangeRepository
 ): ConvertCurrencyUseCase {
-    override fun execute(amount: BigDecimal, fromCurrency: String, toCurrency: String): BigDecimal {
+    override fun execute(amount: BigDecimal, fromCurrency: String, toCurrency: String, userId: Long): ExchangeResponse {
         val exchangeResult = exchangeGateway.findRates(fromCurrency, toCurrency)
 
         val rateConversion =
             calculateConversionRate(exchangeResult.rates[fromCurrency], exchangeResult.rates[toCurrency])
         val result = calculateAmount(amount, rateConversion)
 
-        exchangeRepository.save(Exchange(
+        val exchangeModel = exchangeRepository.save(Exchange(
+            userId = userId,
             amount = amount,
             fromCurrency = fromCurrency,
             toCurrency = toCurrency,
             result = result
         ))
-        return result
+        return exchangeModel.toExchangeResponse()
     }
 
     private fun calculateConversionRate(currency: Double?, destinyCurrency: Double?): BigDecimal? {
