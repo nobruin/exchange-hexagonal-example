@@ -1,7 +1,7 @@
 package jaya.tech.exchange.application.usecases.user
 
-import jaya.tech.exchange.domain.User
+import jaya.tech.exchange.adapters.input.rest.dtos.AuthUserDTO
 
 interface LoginUseCase {
-    fun execute(userName: String, password: String): User
+    fun execute(userName: String, password: String): AuthUserDTO
 }
