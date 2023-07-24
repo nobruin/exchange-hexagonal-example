@@ -4,8 +4,7 @@ import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import jaya.tech.exchange.adapters.input.rest.dtos.AuthUserDTO
-import jaya.tech.exchange.domain.User
-import java.util.Date
+import java.util.*
 
 class JwtTokenProviderImpl(private val secretKey: String, private val expirationTimeMs: Long) : JwtTokenProvider{
 
