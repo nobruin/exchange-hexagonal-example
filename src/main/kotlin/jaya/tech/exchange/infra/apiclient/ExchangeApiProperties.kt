@@ -1,6 +1,6 @@
 package jaya.tech.exchange.infra.apiclient
 
 class ExchangeApiProperties {
-    lateinit var uri: String
-    lateinit var secret: String
+    var uri: String = System.getProperty("exchange.api.uri")
+    var secret: String = System.getProperty("exchange.api.secret")
 }

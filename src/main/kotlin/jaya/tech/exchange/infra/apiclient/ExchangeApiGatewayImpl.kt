@@ -6,7 +6,7 @@ import jaya.tech.exchange.adapters.output.external.exchangeapi.ExchangeGateway
 import jaya.tech.exchange.adapters.output.external.exchangeapi.entities.ExchangeResult
 
 
-class ExchangeApiGateway(
+class ExchangeApiGatewayImpl(
     private val properties: ExchangeApiProperties,
     ): ExchangeGateway {
     override fun findRates(fromCurrency: String, toCurrency: String): ExchangeResult
