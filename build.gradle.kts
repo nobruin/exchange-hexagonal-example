@@ -5,7 +5,10 @@ val jacksonVersion = "2.15.2"
 var slf4jVersion = "1.7.25"
 var jsonTokenVersion = "0.11.2"
 var javalinVersion = "5.6.1"
+var koinVersion = "3.1.2"
+
 plugins {
+    id("com.google.devtools.ksp") version "1.8.21-1.0.11"
     kotlin("jvm") version "1.9.0"
     application
     jacoco
@@ -29,6 +32,7 @@ dependencies {
     implementation("io.javalin:javalin:$javalinVersion")
     implementation("org.slf4j:slf4j-simple:2.0.7")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("io.insert-koin:koin-core:$koinVersion")
 
     testImplementation(kotlin("test"))
     testImplementation("io.mockk:mockk:$mockVersion")

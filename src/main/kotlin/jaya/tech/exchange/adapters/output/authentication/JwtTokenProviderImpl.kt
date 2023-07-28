@@ -6,8 +6,9 @@ import io.jsonwebtoken.security.Keys
 import jaya.tech.exchange.adapters.input.rest.dtos.AuthUserDTO
 import java.util.Date
 
-class JwtTokenProviderImpl(private val secretKey: String, private val expirationTimeMs: Long) : JwtTokenProvider{
-
+class JwtTokenProviderImpl() : JwtTokenProvider{
+    private val secretKey: String = "secret"
+    private val expirationTimeMs: Long = 86400000
     private val key = Keys.hmacShaKeyFor(secretKey.toByteArray())
     override fun createToken(user: AuthUserDTO): String {
         return Jwts.builder()
