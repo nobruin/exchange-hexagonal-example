@@ -1,7 +1,11 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import io.javalin.Javalin
+import jaya.tech.exchange.adapters.input.rest.routes.exchangeRoutes
+import jaya.tech.exchange.adapters.input.rest.routes.userRoutes
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main() {
+    val app = Javalin.create().start(8080)
+
+    // Register routes
+    app.exchangeRoutes()
+    app.userRoutes()
 }

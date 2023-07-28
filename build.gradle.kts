@@ -4,6 +4,7 @@ val mockVersion = "1.13.5"
 val jacksonVersion = "2.15.2"
 var slf4jVersion = "1.7.25"
 var jsonTokenVersion = "0.11.2"
+var javalinVersion = "5.6.1"
 plugins {
     kotlin("jvm") version "1.9.0"
     application
@@ -25,6 +26,9 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-api:$jsonTokenVersion")
     implementation("io.jsonwebtoken:jjwt-jackson:$jsonTokenVersion")
     implementation("io.jsonwebtoken:jjwt-impl:$jsonTokenVersion")
+    implementation("io.javalin:javalin:$javalinVersion")
+    implementation("org.slf4j:slf4j-simple:2.0.7")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     testImplementation(kotlin("test"))
     testImplementation("io.mockk:mockk:$mockVersion")
