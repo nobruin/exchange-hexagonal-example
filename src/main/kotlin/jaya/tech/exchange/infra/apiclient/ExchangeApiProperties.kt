@@ -1,6 +1,6 @@
 package jaya.tech.exchange.infra.apiclient
 
 class ExchangeApiProperties {
-    var uri: String = System.getProperty("exchange.api.uri")
-    var secret: String = System.getProperty("exchange.api.secret")
+    var uri: String = System.getenv("EXCHANGE_API_URI")
+    var secret: String = System.getenv("EXCHANGE_API_SECRET")
 }

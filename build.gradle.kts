@@ -9,6 +9,7 @@ var koinVersion = "3.1.2"
 
 plugins {
     id("com.google.devtools.ksp") version "1.9.0-1.0.11"
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
     kotlin("jvm") version "1.9.0"
     application
     jacoco
@@ -50,5 +51,5 @@ tasks.withType<KotlinCompile> {
 }
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("ApplicationKt")
 }

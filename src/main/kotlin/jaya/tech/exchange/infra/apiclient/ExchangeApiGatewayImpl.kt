@@ -22,6 +22,7 @@ class ExchangeApiGatewayImpl(
     companion object{
         const val ACCESS_KEY = "access_key"
         const val SYMBOLS = "symbols"
-        const val ROUTE = "/latest"
+        private const val API_VERSION = "/v1"
+        const val ROUTE = "$API_VERSION/latest"
     }
 }
