@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val fuel = "2.3.1"
 val mockVersion = "1.13.5"
 val jacksonVersion = "2.15.2"
-var slf4jVersion = "1.7.25"
+var slf4jVersion = "2.0.7"
 var jsonTokenVersion = "0.11.2"
 var javalinVersion = "5.6.1"
 var koinVersion = "3.1.2"
@@ -23,6 +23,7 @@ repositories {
 }
 
 dependencies {
+    implementation(kotlin("stdlib"))
     implementation("com.github.kittinunf.fuel:fuel:$fuel")
     implementation("com.github.kittinunf.fuel:fuel-gson:$fuel")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
@@ -31,8 +32,7 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-jackson:$jsonTokenVersion")
     implementation("io.jsonwebtoken:jjwt-impl:$jsonTokenVersion")
     implementation("io.javalin:javalin:$javalinVersion")
-    implementation("org.slf4j:slf4j-simple:2.0.7")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.slf4j:slf4j-simple:$slf4jVersion")
     implementation("io.insert-koin:koin-core:$koinVersion")
 
     testImplementation(kotlin("test"))
