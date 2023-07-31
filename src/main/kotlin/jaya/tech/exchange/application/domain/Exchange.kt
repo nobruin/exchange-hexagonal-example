@@ -1,4 +1,4 @@
-package jaya.tech.exchange.domain
+package jaya.tech.exchange.application.domain
 
 import java.math.BigDecimal
 

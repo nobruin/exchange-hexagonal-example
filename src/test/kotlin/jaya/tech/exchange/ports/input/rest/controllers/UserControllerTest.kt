@@ -8,7 +8,7 @@ import jaya.tech.exchange.ports.input.rest.dtos.LoginRequest
 import jaya.tech.exchange.ports.output.authentication.JwtTokenProvider
 import jaya.tech.exchange.application.usecases.user.CreateUserUseCase
 import jaya.tech.exchange.application.usecases.user.LoginUseCase
-import jaya.tech.exchange.domain.User
+import jaya.tech.exchange.application.domain.User
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 

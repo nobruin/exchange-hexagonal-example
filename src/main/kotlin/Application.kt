@@ -2,7 +2,7 @@ import io.javalin.Javalin
 import jaya.tech.exchange.ports.input.rest.routes.exchangeRoutes
 import jaya.tech.exchange.ports.input.rest.routes.userRoutes
 import jaya.tech.exchange.infra.adapters.Loggable
-import jaya.tech.exchange.infra.adapters.modules.appModule
+import jaya.tech.exchange.infra.modules.appModule
 import org.koin.core.context.startKoin
 
 class Application : Loggable {

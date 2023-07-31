@@ -1,4 +1,4 @@
-package jaya.tech.exchange.infra.adapters.modules
+package jaya.tech.exchange.infra.modules
 
 import jaya.tech.exchange.ports.input.rest.controllers.ExchangeController
 import jaya.tech.exchange.ports.input.rest.controllers.UserController
