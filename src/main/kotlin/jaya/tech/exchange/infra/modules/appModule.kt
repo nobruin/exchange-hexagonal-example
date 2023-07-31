@@ -16,8 +16,6 @@ import jaya.tech.exchange.infra.apiclient.ExchangeApiGatewayImpl
 import jaya.tech.exchange.infra.database.UserRepositoryImpl
 import org.koin.dsl.module
 
-
-//TODO: Add all dependencies here
 var appModule = module {
     single<ExchangeGateway> { ExchangeApiGatewayImpl(get()) }
     single<CreateUserUseCase> { CreateUserUseCaseIMpl(get()) }
