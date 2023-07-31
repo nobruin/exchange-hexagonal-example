@@ -2,10 +2,10 @@ package jaya.tech.exchange.aplication.usecases
 
 import io.mockk.every
 import io.mockk.mockk
-import jaya.tech.exchange.adapters.output.external.exchangeapi.ExchangeGateway
-import jaya.tech.exchange.adapters.output.external.exchangeapi.entities.ExchangeResult
-import jaya.tech.exchange.adapters.output.persistence.entities.ExchangeModel
-import jaya.tech.exchange.adapters.output.persistence.repositories.ExchangeRepository
+import jaya.tech.exchange.ports.output.external.exchangeapi.ExchangeGateway
+import jaya.tech.exchange.ports.output.external.exchangeapi.entities.ExchangeResult
+import jaya.tech.exchange.ports.output.persistence.entities.ExchangeModel
+import jaya.tech.exchange.ports.output.persistence.repositories.ExchangeRepository
 import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCaseImpl
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test

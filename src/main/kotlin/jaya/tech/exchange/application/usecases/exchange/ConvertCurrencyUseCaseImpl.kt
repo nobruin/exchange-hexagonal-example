@@ -1,11 +1,11 @@
 package jaya.tech.exchange.application.usecases.exchange
 
-import jaya.tech.exchange.adapters.input.rest.dtos.ExchangeResponse
-import jaya.tech.exchange.adapters.input.rest.dtos.toExchangeResponse
-import jaya.tech.exchange.adapters.output.external.exchangeapi.ExchangeGateway
-import jaya.tech.exchange.adapters.output.persistence.repositories.ExchangeRepository
+import jaya.tech.exchange.ports.input.rest.dtos.ExchangeResponse
+import jaya.tech.exchange.ports.input.rest.dtos.toExchangeResponse
+import jaya.tech.exchange.ports.output.external.exchangeapi.ExchangeGateway
+import jaya.tech.exchange.ports.output.persistence.repositories.ExchangeRepository
 import jaya.tech.exchange.domain.Exchange
-import jaya.tech.exchange.infra.Loggable
+import jaya.tech.exchange.infra.adapters.Loggable
 import java.lang.RuntimeException
 import java.math.BigDecimal
 
