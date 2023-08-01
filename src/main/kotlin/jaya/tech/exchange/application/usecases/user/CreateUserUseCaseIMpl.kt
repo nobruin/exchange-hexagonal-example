@@ -26,15 +26,18 @@ class CreateUserUseCaseIMpl(private val userRepository: UserRepository): CreateU
 
     private fun userValidation(user: User): Boolean {
         takeUnless { user.isValid() }?.let {
-            log.error("User is invalid")
-            throw RuntimeException("User is invalid")
+            log.error(USER_INVALID_MESSAGE)
+            throw RuntimeException(USER_INVALID_MESSAGE)
         }
         userRepository.getUserByUsername(user.username)?.let {
-            log.error("User is invalid")
-            throw RuntimeException("User already exists")
+            log.error(USER_ALREADY_EXISTS_MESSAGE)
+            throw RuntimeException(USER_ALREADY_EXISTS_MESSAGE )
         }
         return true
     }
 
-
+    companion object{
+        const val USER_INVALID_MESSAGE = "User is invalid"
+        const val USER_ALREADY_EXISTS_MESSAGE = "User already exists"
+    }
 }
