@@ -35,20 +35,25 @@ class ConvertCurrencyUseCaseImpl(
 
     private fun calculateConversionRate(currency: Double?, destinyCurrency: Double?): BigDecimal? {
         when {
-            currency == null || currency <= 0.0 -> throw RuntimeException(BAD_REQUEST_EXCEPTION_MESSAGE)
-            destinyCurrency == null || destinyCurrency <= 0.0 -> throw RuntimeException(BAD_REQUEST_EXCEPTION_MESSAGE)
+            currency == null || currency <= 0.0 -> throw RuntimeException(BAD_REQUEST_EXCEPTION_MESSAGE).also {
+                log.error(BAD_REQUEST_EXCEPTION_MESSAGE)
+            }
+            destinyCurrency == null || destinyCurrency <= 0.0 -> throw RuntimeException(BAD_REQUEST_EXCEPTION_MESSAGE).also {
+                log.error(BAD_REQUEST_EXCEPTION_MESSAGE)
+            }
         }
         return (destinyCurrency?.div(currency!!))?.toBigDecimal()
     }
 
     private fun calculateAmount(amount: BigDecimal, rateConversion: BigDecimal?): BigDecimal {
-        if (rateConversion == null || rateConversion <= "0.0".toBigDecimal()) {
-            throw RuntimeException("value is invalid for this operation")
+        rateConversion ?: throw RuntimeException(BAD_REQUEST_EXCEPTION_MESSAGE_RATE_NOT_FOUND).also {
+            log.error(BAD_REQUEST_EXCEPTION_MESSAGE_RATE_NOT_FOUND)
         }
         return amount.let { rateConversion.times(it) }
     }
 
     companion object {
-        const val BAD_REQUEST_EXCEPTION_MESSAGE = "values or Values is invalid for this operation"
+        const val BAD_REQUEST_EXCEPTION_MESSAGE = "values or Values is invalid for conversion"
+        const val BAD_REQUEST_EXCEPTION_MESSAGE_RATE_NOT_FOUND = "Rate of conversion not found"
     }
 }
