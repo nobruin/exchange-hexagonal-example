@@ -3,6 +3,7 @@ package jaya.tech.exchange.aplication.usecases
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import java.util.UUID
 import jaya.tech.exchange.application.domain.toEntity
 import jaya.tech.exchange.application.usecases.user.CreateUserUseCaseIMpl
 import jaya.tech.exchange.ports.output.persistence.entities.UserModel
@@ -13,6 +14,7 @@ import kotlin.test.assertEquals
 
 class CreateUserUseCaseImplTest {
 
+    private val userId = UUID.randomUUID()
     @Test
     fun `should create User with Invalid username`() {
 
@@ -26,7 +28,7 @@ class CreateUserUseCaseImplTest {
         }
 
         verify(exactly = 0) { userRepository.getUserByUsername(any()) }
-        verify(exactly = 0) { userRepository.createUser(any())}
+        verify(exactly = 0) { userRepository.save(any())}
     }
 
     @Test
@@ -41,7 +43,7 @@ class CreateUserUseCaseImplTest {
         }
 
         verify(exactly = 0) { userRepository.getUserByUsername(any()) }
-        verify(exactly = 0) { userRepository.createUser(any())}
+        verify(exactly = 0) { userRepository.save(any())}
     }
 
     @Test
@@ -56,7 +58,7 @@ class CreateUserUseCaseImplTest {
         }
 
         verify(exactly = 0) { userRepository.getUserByUsername(any()) }
-        verify(exactly = 0) { userRepository.createUser(any())}
+        verify(exactly = 0) { userRepository.save(any())}
     }
 
     @Test
@@ -64,7 +66,7 @@ class CreateUserUseCaseImplTest {
         val userRepository = mockk<UserRepository>()
         val useCase = CreateUserUseCaseIMpl(userRepository)
         val userModel = UserModel(
-            id = USER_ID,
+            id = userId,
             username = USERNAME,
             email = EMAIL,
             password = PASSWORD
@@ -79,7 +81,7 @@ class CreateUserUseCaseImplTest {
         }
 
         verify(exactly = 1) { userRepository.getUserByUsername(any()) }
-        verify(exactly = 0) { userRepository.createUser(any())}
+        verify(exactly = 0) { userRepository.save(any())}
     }
 
     @Test
@@ -87,24 +89,23 @@ class CreateUserUseCaseImplTest {
         val userRepository = mockk<UserRepository>()
         val useCase = CreateUserUseCaseIMpl(userRepository)
         val userModel = UserModel(
-            id = USER_ID,
+            id = userId,
             username = USERNAME,
             email = EMAIL,
             password = PASSWORD
         )
 
         every { userRepository.getUserByUsername(USERNAME) } returns null
-        every { userRepository.createUser(any()) } returns userModel
+        every { userRepository.save(any()) } returns userModel
 
         val user = useCase.execute(USERNAME, EMAIL, PASSWORD)
         assertEquals(user, userModel.toEntity())
 
         verify(exactly = 1) { userRepository.getUserByUsername(any()) }
-        verify(exactly = 1) { userRepository.createUser(any()) }
+        verify(exactly = 1) { userRepository.save(any()) }
     }
 
     companion object{
-        const val USER_ID = 1L
         const val USERNAME = "username"
         const val EMAIL = "email@email.com"
         const val PASSWORD = "123"

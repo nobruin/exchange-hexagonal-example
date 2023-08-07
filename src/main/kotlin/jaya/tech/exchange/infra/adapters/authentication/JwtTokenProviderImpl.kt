@@ -7,6 +7,7 @@ import jaya.tech.exchange.ports.input.rest.dtos.AuthUserDTO
 import jaya.tech.exchange.ports.output.authentication.JwtTokenProvider
 import java.security.SecureRandom
 import java.util.Date
+import java.util.UUID
 
 class JwtTokenProviderImpl : JwtTokenProvider {
     private val expirationTimeMs: Long = 86400000
@@ -34,7 +35,7 @@ class JwtTokenProviderImpl : JwtTokenProvider {
     override fun getUserFromToken(token: String): AuthUserDTO? {
         return try {
             val claims: Claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).body
-            val id = claims["id"] as Long
+            val id = claims["id"] as UUID
             val username = claims["username"] as String
             val email = claims["email"] as String
             AuthUserDTO(id, username, email)

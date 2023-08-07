@@ -15,12 +15,12 @@ class CreateUserUseCaseIMpl(private val userRepository: UserRepository): CreateU
                 password = password
             ).let {user ->
                 userValidation(user)
-                userRepository.createUser(user).toEntity().also {
-                    log.info("User created with success")
+                userRepository.save(user).toEntity().also {
+                    log.info(USER_CREATED_MESSAGE)
                 }
             }
-        }.onFailure {
-            throw it
+        }.onFailure { ex ->
+            throw ex
         }.getOrThrow()
     }
 
@@ -39,5 +39,6 @@ class CreateUserUseCaseIMpl(private val userRepository: UserRepository): CreateU
     companion object{
         const val USER_INVALID_MESSAGE = "User is invalid"
         const val USER_ALREADY_EXISTS_MESSAGE = "User already exists"
+        const val USER_CREATED_MESSAGE = "User created with success"
     }
 }

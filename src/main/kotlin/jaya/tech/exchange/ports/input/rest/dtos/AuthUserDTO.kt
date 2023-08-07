@@ -1,3 +1,5 @@
 package jaya.tech.exchange.ports.input.rest.dtos
 
-class AuthUserDTO(val id: Long, val username: String, val email: String)
+import java.util.UUID
+
+class AuthUserDTO(val id: UUID, val username: String, val email: String)

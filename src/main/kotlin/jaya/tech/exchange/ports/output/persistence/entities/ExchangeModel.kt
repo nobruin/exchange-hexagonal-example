@@ -4,10 +4,11 @@ import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
+import java.util.UUID
 
 class ExchangeModel(
-    val id: Long? = null,
-    val userId: Long? = null,
+    val id: UUID? = null,
+    val userId: UUID? = null,
     val amount: BigDecimal = "0.0".toBigDecimal(),
     val fromCurrency: String = "",
     val toCurrency: String = "",

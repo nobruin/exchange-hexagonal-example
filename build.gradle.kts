@@ -6,6 +6,9 @@ var slf4jVersion = "2.0.7"
 var jsonTokenVersion = "0.11.2"
 var javalinVersion = "5.6.1"
 var koinVersion = "3.1.2"
+var exposedVersion = "0.42.0"
+var sqliteVersion = "3.42.0.0"
+var h2Version = "2.2.220"
 
 plugins {
     id("com.google.devtools.ksp") version "1.9.0-1.0.11"
@@ -34,6 +37,13 @@ dependencies {
     implementation("io.javalin:javalin:$javalinVersion")
     implementation("org.slf4j:slf4j-simple:$slf4jVersion")
     implementation("io.insert-koin:koin-core:$koinVersion")
+
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion") // JDBC dependency
+    implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
+    implementation("org.xerial:sqlite-jdbc:$sqliteVersion")
+    implementation("com.h2database:h2:$h2Version")
 
     testImplementation(kotlin("test"))
     testImplementation("io.mockk:mockk:$mockVersion")

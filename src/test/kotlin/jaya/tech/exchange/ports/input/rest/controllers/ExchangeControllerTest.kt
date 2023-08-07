@@ -2,24 +2,26 @@ package jaya.tech.exchange.ports.input.rest.controllers
 
 import io.mockk.every
 import io.mockk.mockk
+import java.util.UUID
+import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCase
 import jaya.tech.exchange.ports.input.rest.dtos.AuthUserDTO
 import jaya.tech.exchange.ports.input.rest.dtos.ExchangeRequest
 import jaya.tech.exchange.ports.input.rest.dtos.ExchangeResponse
 import jaya.tech.exchange.ports.output.authentication.JwtTokenProvider
-import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCase
-import org.junit.jupiter.api.assertThrows
-import java.lang.Exception
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.assertThrows
 
 class ExchangeControllerTest {
+
+    private val userId = UUID.randomUUID()
     @Test
     fun `Test conversion API endpoint with invalid token`() {
         val convertCurrencyUseCase = mockk<ConvertCurrencyUseCase>()
         val jwtTokenProvider = mockk<JwtTokenProvider>()
         val controller = ExchangeController(convertCurrencyUseCase, jwtTokenProvider)
 
-        val request = ExchangeRequest(AMOUNT_REQUEST.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, USER_ID)
+        val request = ExchangeRequest(AMOUNT_REQUEST.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, userId)
         val expectedResponse = ExchangeResponse(
             amount = request.amount,
             toCurrency = request.toCurrency,
@@ -42,7 +44,7 @@ class ExchangeControllerTest {
         val jwtTokenProvider = mockk<JwtTokenProvider>()
         val controller = ExchangeController(convertCurrencyUseCase, jwtTokenProvider)
 
-        val request = ExchangeRequest(AMOUNT_REQUEST.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, USER_ID)
+        val request = ExchangeRequest(AMOUNT_REQUEST.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, userId)
 
         every {
             convertCurrencyUseCase.execute(request.amount, request.fromCurrency, request.toCurrency, request.userId)
@@ -59,12 +61,12 @@ class ExchangeControllerTest {
         val jwtTokenProvider = mockk<JwtTokenProvider>()
         val controller = ExchangeController(convertCurrencyUseCase, jwtTokenProvider)
         val authUserDTO = AuthUserDTO(
-            id = USER_ID,
+            id = UUID.randomUUID(),
             username = USERNAME,
             email = LOGIN
         )
 
-        val request = ExchangeRequest(AMOUNT_REQUEST.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, USER_ID)
+        val request = ExchangeRequest(AMOUNT_REQUEST.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, userId)
         val expectedResponse = ExchangeResponse(
             amount = request.amount,
             toCurrency = request.toCurrency,
@@ -86,7 +88,6 @@ class ExchangeControllerTest {
     }
 
     companion object{
-        const val USER_ID = 1L
         const val FROM_CURRENCY = "USD"
         const val TO_CURRENCY = "BRL"
         const val AMOUNT_REQUEST = "100.0"

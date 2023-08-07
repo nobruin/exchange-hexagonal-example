@@ -8,12 +8,13 @@ import jaya.tech.exchange.application.domain.Exchange
 import jaya.tech.exchange.infra.adapters.Loggable
 import java.lang.RuntimeException
 import java.math.BigDecimal
+import java.util.*
 
 class ConvertCurrencyUseCaseImpl(
     private val exchangeGateway: ExchangeGateway,
     private val exchangeRepository: ExchangeRepository
 ) : ConvertCurrencyUseCase, Loggable {
-    override fun execute(amount: BigDecimal, fromCurrency: String, toCurrency: String, userId: Long): ExchangeResponse {
+    override fun execute(amount: BigDecimal, fromCurrency: String, toCurrency: String, userId: UUID): ExchangeResponse {
         log.info("convert currency from $fromCurrency to $toCurrency with amount $amount and userId $userId")
         val exchangeResult = exchangeGateway.findRates(fromCurrency, toCurrency)
 

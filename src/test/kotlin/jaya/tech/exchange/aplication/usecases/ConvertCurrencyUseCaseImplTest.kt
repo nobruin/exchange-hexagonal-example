@@ -2,6 +2,7 @@ package jaya.tech.exchange.aplication.usecases
 
 import io.mockk.every
 import io.mockk.mockk
+import java.util.UUID
 import jaya.tech.exchange.ports.output.external.exchangeapi.ExchangeGateway
 import jaya.tech.exchange.ports.output.external.exchangeapi.entities.ExchangeResult
 import jaya.tech.exchange.ports.output.persistence.entities.ExchangeModel
@@ -13,6 +14,9 @@ import kotlin.test.assertEquals
 
 class ConvertCurrencyUseCaseImplTest {
 
+    private val userId = UUID.randomUUID()
+    private val exchangeID = UUID.randomUUID()
+
     @Test
     fun `should convert currency with gateway error`() {
         val exchangeGateway: ExchangeGateway = mockk<ExchangeGateway>()
@@ -22,7 +26,7 @@ class ConvertCurrencyUseCaseImplTest {
         every { exchangeGateway.findRates(any(), any()) } throws RuntimeException("error")
 
         assertThrows<RuntimeException> {
-            useCase.execute(1.0.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, USER_ID)
+            useCase.execute(1.0.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, userId)
         }
     }
 
@@ -43,7 +47,7 @@ class ConvertCurrencyUseCaseImplTest {
         every { exchangeRepository.save(any()) } throws RuntimeException("error")
 
         assertThrows<RuntimeException> {
-            useCase.execute(1.0.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, USER_ID)
+            useCase.execute(1.0.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, userId)
         }
     }
 
@@ -53,8 +57,8 @@ class ConvertCurrencyUseCaseImplTest {
         val exchangeRepository: ExchangeRepository = mockk<ExchangeRepository>()
         val useCase = ConvertCurrencyUseCaseImpl(exchangeGateway, exchangeRepository)
         val exchangeModel = ExchangeModel(
-            id = 1L,
-            userId = USER_ID,
+            id = exchangeID,
+            userId = userId,
             amount = AMOUNT_REQUESTED.toBigDecimal(),
             fromCurrency = FROM_CURRENCY,
             toCurrency = TO_CURRENCY,
@@ -71,7 +75,7 @@ class ConvertCurrencyUseCaseImplTest {
         every { exchangeGateway.findRates("USD", "BRL") } returns exchangeResult
         every { exchangeRepository.save(any()) } returns exchangeModel
 
-        useCase.execute(AMOUNT_REQUESTED.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, USER_ID).let { result ->
+        useCase.execute(AMOUNT_REQUESTED.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, userId).let { result ->
             assertEquals(result.userId, exchangeModel.userId)
             assertEquals(result.fromCurrency, exchangeModel.fromCurrency)
             assertEquals(result.toCurrency, exchangeModel.toCurrency)
@@ -80,13 +84,10 @@ class ConvertCurrencyUseCaseImplTest {
     }
 
     companion object{
-        const val USER_ID = 1L
         const val FROM_CURRENCY = "USD"
         const val TO_CURRENCY = "BRL"
         const val AMOUNT_REQUESTED = 1.0
         const val EXCHANGE_STATUS = true
         const val TIMESTAMP = 1L
     }
-
-//    success=true, timestamp=1690586103, base=EUR, date=2023-07-28, rates={BRL=5.219396, USD=1.103139}
 }
