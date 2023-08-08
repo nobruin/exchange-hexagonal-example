@@ -3,12 +3,12 @@ package jaya.tech.exchange.aplication.usecases
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import java.util.UUID
 import jaya.tech.exchange.application.domain.toEntity
 import jaya.tech.exchange.application.usecases.user.CreateUserUseCaseIMpl
 import jaya.tech.exchange.ports.output.persistence.entities.UserModel
 import jaya.tech.exchange.ports.output.persistence.repositories.UserRepository
 import org.junit.jupiter.api.assertThrows
+import java.util.UUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -28,7 +28,7 @@ class CreateUserUseCaseImplTest {
         }
 
         verify(exactly = 0) { userRepository.getUserByUsername(any()) }
-        verify(exactly = 0) { userRepository.save(any())}
+        verify(exactly = 0) { userRepository.save(any()) }
     }
 
     @Test
@@ -43,7 +43,7 @@ class CreateUserUseCaseImplTest {
         }
 
         verify(exactly = 0) { userRepository.getUserByUsername(any()) }
-        verify(exactly = 0) { userRepository.save(any())}
+        verify(exactly = 0) { userRepository.save(any()) }
     }
 
     @Test
@@ -58,7 +58,7 @@ class CreateUserUseCaseImplTest {
         }
 
         verify(exactly = 0) { userRepository.getUserByUsername(any()) }
-        verify(exactly = 0) { userRepository.save(any())}
+        verify(exactly = 0) { userRepository.save(any()) }
     }
 
     @Test
@@ -75,13 +75,13 @@ class CreateUserUseCaseImplTest {
         every { userRepository.getUserByUsername(USERNAME) } returns userModel
 
         assertThrows<Exception> {
-              useCase.execute(USERNAME, EMAIL, PASSWORD)
+            useCase.execute(USERNAME, EMAIL, PASSWORD)
         }.let { ex ->
             assert(ex.message == CreateUserUseCaseIMpl.USER_ALREADY_EXISTS_MESSAGE)
         }
 
         verify(exactly = 1) { userRepository.getUserByUsername(any()) }
-        verify(exactly = 0) { userRepository.save(any())}
+        verify(exactly = 0) { userRepository.save(any()) }
     }
 
     @Test
@@ -105,7 +105,7 @@ class CreateUserUseCaseImplTest {
         verify(exactly = 1) { userRepository.save(any()) }
     }
 
-    companion object{
+    companion object {
         const val USERNAME = "username"
         const val EMAIL = "email@email.com"
         const val PASSWORD = "123"

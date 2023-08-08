@@ -1,11 +1,11 @@
 package jaya.tech.exchange.ports.input.rest.controllers
 
+import jaya.tech.exchange.application.usecases.user.CreateUserUseCase
+import jaya.tech.exchange.application.usecases.user.LoginUseCase
 import jaya.tech.exchange.ports.input.rest.dtos.CreateUserRequest
 import jaya.tech.exchange.ports.input.rest.dtos.CreateUserResponse
 import jaya.tech.exchange.ports.input.rest.dtos.LoginRequest
 import jaya.tech.exchange.ports.output.authentication.JwtTokenProvider
-import jaya.tech.exchange.application.usecases.user.CreateUserUseCase
-import jaya.tech.exchange.application.usecases.user.LoginUseCase
 
 class UserController(
     private val createUserUseCase: CreateUserUseCase,
@@ -28,8 +28,7 @@ class UserController(
         throw Exception(INVALID_CREDENTIALS_MESSAGE)
     }.getOrThrow()
 
-
-    companion object{
+    companion object {
         const val INVALID_CREDENTIALS_MESSAGE = "Your Credentials are invalid!"
     }
 }

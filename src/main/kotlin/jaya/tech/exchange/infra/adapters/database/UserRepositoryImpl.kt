@@ -3,15 +3,16 @@ package jaya.tech.exchange.infra.adapters.database
 import jaya.tech.exchange.application.domain.User
 import jaya.tech.exchange.ports.output.persistence.entities.UserModel
 import jaya.tech.exchange.ports.output.persistence.repositories.UserRepository
-import org.jetbrains.exposed.sql.transactions.transaction
-import java.util.UUID
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
+import java.util.UUID
 
 object UsersTable : Table() {
     val id = uuid("id").autoGenerate()
@@ -49,6 +50,14 @@ class UserRepositoryImpl(private val database: Database) : UserRepository {
         }
     }
 
+    override fun getUserByUsernameAndPassword(username: String, password: String): UserModel? {
+        return transaction(database) {
+            UsersTable.select { (UsersTable.username eq username) and (UsersTable.password eq password) }
+                .mapNotNull { row -> row.toUserModel() }
+                .singleOrNull()
+        }
+    }
+
     override fun getById(userId: UUID): UserModel =
         transaction(database) {
             UsersTable.select { UsersTable.id eq userId }
@@ -74,7 +83,7 @@ class UserRepositoryImpl(private val database: Database) : UserRepository {
         return UserModel(userId, user.username, user.email, user.password)
     }
 
-    private fun update(userId: UUID,user: User): UserModel {
+    private fun update(userId: UUID, user: User): UserModel {
         runCatching {
             transaction(database) {
                 UsersTable.update({ UsersTable.id eq userId }) {
@@ -82,7 +91,7 @@ class UserRepositoryImpl(private val database: Database) : UserRepository {
                     it[email] = user.email
                 }
             }
-        }.onFailure{ ex ->
+        }.onFailure { ex ->
             throw RuntimeException("Error update user id: $userId $ex.message")
         }
         return UserModel(userId, user.username, user.email, user.password)

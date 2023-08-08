@@ -2,19 +2,20 @@ package jaya.tech.exchange.ports.input.rest.controllers
 
 import io.mockk.every
 import io.mockk.mockk
-import java.util.UUID
 import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCase
 import jaya.tech.exchange.ports.input.rest.dtos.AuthUserDTO
 import jaya.tech.exchange.ports.input.rest.dtos.ExchangeRequest
 import jaya.tech.exchange.ports.input.rest.dtos.ExchangeResponse
 import jaya.tech.exchange.ports.output.authentication.JwtTokenProvider
+import org.junit.jupiter.api.assertThrows
+import java.util.UUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.junit.jupiter.api.assertThrows
 
 class ExchangeControllerTest {
 
     private val userId = UUID.randomUUID()
+
     @Test
     fun `Test conversion API endpoint with invalid token`() {
         val convertCurrencyUseCase = mockk<ConvertCurrencyUseCase>()
@@ -48,7 +49,7 @@ class ExchangeControllerTest {
 
         every {
             convertCurrencyUseCase.execute(request.amount, request.fromCurrency, request.toCurrency, request.userId)
-        } throws  Exception("Invalid User")
+        } throws Exception("Invalid User")
 
         assertThrows<Exception> {
             controller.exchange(JWT_TOKEN, request)
@@ -61,7 +62,7 @@ class ExchangeControllerTest {
         val jwtTokenProvider = mockk<JwtTokenProvider>()
         val controller = ExchangeController(convertCurrencyUseCase, jwtTokenProvider)
         val authUserDTO = AuthUserDTO(
-            id = UUID.randomUUID(),
+            id = userId,
             username = USERNAME,
             email = LOGIN
         )
@@ -77,6 +78,7 @@ class ExchangeControllerTest {
         every {
             convertCurrencyUseCase.execute(request.amount, request.fromCurrency, request.toCurrency, request.userId)
         } returns expectedResponse
+
         every { jwtTokenProvider.getUserFromToken(JWT_TOKEN) } returns authUserDTO
 
         val response = controller.exchange(JWT_TOKEN, request)
@@ -87,7 +89,7 @@ class ExchangeControllerTest {
         }
     }
 
-    companion object{
+    companion object {
         const val FROM_CURRENCY = "USD"
         const val TO_CURRENCY = "BRL"
         const val AMOUNT_REQUEST = "100.0"

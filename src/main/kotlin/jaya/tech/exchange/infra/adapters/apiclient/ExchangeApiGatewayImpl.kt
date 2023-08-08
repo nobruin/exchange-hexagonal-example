@@ -2,10 +2,9 @@ package jaya.tech.exchange.infra.adapters.apiclient
 
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.gson.responseObject
+import jaya.tech.exchange.infra.adapters.Loggable
 import jaya.tech.exchange.ports.output.external.exchangeapi.ExchangeGateway
 import jaya.tech.exchange.ports.output.external.exchangeapi.entities.ExchangeResult
-import jaya.tech.exchange.infra.adapters.Loggable
-
 
 class ExchangeApiGatewayImpl(
     private val properties: ExchangeApiProperties,
@@ -13,7 +12,7 @@ class ExchangeApiGatewayImpl(
     override fun findRates(fromCurrency: String, toCurrency: String): ExchangeResult = runCatching {
         Fuel.get(
             properties.uri + ROUTE,
-            listOf(ACCESS_KEY to properties.secret, SYMBOLS to "${fromCurrency},${toCurrency}")
+            listOf(ACCESS_KEY to properties.secret, SYMBOLS to "$fromCurrency,$toCurrency")
         ).responseObject<ExchangeResult>().third.get().also {
             log.info("Rates founded: $it")
         }

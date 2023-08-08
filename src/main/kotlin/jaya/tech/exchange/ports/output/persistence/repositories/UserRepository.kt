@@ -7,5 +7,6 @@ import java.util.UUID
 interface UserRepository {
     fun save(user: User): UserModel
     fun getUserByUsername(username: String): UserModel?
+    fun getUserByUsernameAndPassword(username: String, password: String): UserModel?
     fun getById(userId: UUID): UserModel
 }

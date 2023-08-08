@@ -1,9 +1,9 @@
 import io.javalin.Javalin
-import jaya.tech.exchange.ports.input.rest.routes.exchangeRoutes
-import jaya.tech.exchange.ports.input.rest.routes.userRoutes
 import jaya.tech.exchange.infra.adapters.Loggable
 import jaya.tech.exchange.infra.modules.appModule
 import jaya.tech.exchange.infra.modules.databaseModule
+import jaya.tech.exchange.ports.input.rest.routes.exchangeRoutes
+import jaya.tech.exchange.ports.input.rest.routes.userRoutes
 import org.koin.core.context.startKoin
 
 class Application : Loggable {
@@ -22,7 +22,7 @@ class Application : Loggable {
         }
     }
 
-    companion object{
+    companion object {
         const val API_VERSION = "api/v1"
     }
 }

@@ -2,13 +2,13 @@ package jaya.tech.exchange.aplication.usecases
 
 import io.mockk.every
 import io.mockk.mockk
-import java.util.UUID
+import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCaseImpl
 import jaya.tech.exchange.ports.output.external.exchangeapi.ExchangeGateway
 import jaya.tech.exchange.ports.output.external.exchangeapi.entities.ExchangeResult
 import jaya.tech.exchange.ports.output.persistence.entities.ExchangeModel
 import jaya.tech.exchange.ports.output.persistence.repositories.ExchangeRepository
-import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCaseImpl
 import org.junit.jupiter.api.assertThrows
+import java.util.UUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -83,7 +83,7 @@ class ConvertCurrencyUseCaseImplTest {
         }
     }
 
-    companion object{
+    companion object {
         const val FROM_CURRENCY = "USD"
         const val TO_CURRENCY = "BRL"
         const val AMOUNT_REQUESTED = 1.0

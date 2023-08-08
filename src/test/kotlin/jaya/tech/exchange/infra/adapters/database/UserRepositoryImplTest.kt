@@ -9,7 +9,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
-class UserRepositoryTest {
+class UserRepositoryImplTest {
 
     private lateinit var database: Database
     private lateinit var userRepository: UserRepositoryImpl
@@ -27,7 +27,7 @@ class UserRepositoryTest {
 
     @Test
     fun `should be create, get and update User`() {
-        val user = User( null, USERNAME, USERNAME, PASSWORD)
+        val user = User(null, USERNAME, USERNAME, PASSWORD)
         val createdUser = userRepository.save(user)
 
         assertEquals(user.username, createdUser.username)
@@ -44,7 +44,7 @@ class UserRepositoryTest {
 
     @Test
     fun `should create user and get user by username`() {
-        val user = User( null, USERNAME, EMAIL, PASSWORD)
+        val user = User(null, USERNAME, EMAIL, PASSWORD)
         userRepository.save(user)
 
         val retrievedUser = userRepository.getUserByUsername(USERNAME)
@@ -58,7 +58,7 @@ class UserRepositoryTest {
         assertNull(retrievedUser)
     }
 
-    companion object{
+    companion object {
         const val USERNAME = "username"
         const val EMAIL = "email@email.com"
         const val PASSWORD = "12345"

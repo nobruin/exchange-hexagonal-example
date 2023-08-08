@@ -2,15 +2,15 @@ package jaya.tech.exchange.ports.input.rest.controllers
 
 import io.mockk.every
 import io.mockk.mockk
-import java.util.UUID
+import jaya.tech.exchange.application.domain.User
+import jaya.tech.exchange.application.usecases.user.CreateUserUseCase
+import jaya.tech.exchange.application.usecases.user.LoginUseCase
 import jaya.tech.exchange.ports.input.rest.dtos.AuthUserDTO
 import jaya.tech.exchange.ports.input.rest.dtos.CreateUserRequest
 import jaya.tech.exchange.ports.input.rest.dtos.LoginRequest
 import jaya.tech.exchange.ports.output.authentication.JwtTokenProvider
-import jaya.tech.exchange.application.usecases.user.CreateUserUseCase
-import jaya.tech.exchange.application.usecases.user.LoginUseCase
-import jaya.tech.exchange.application.domain.User
 import org.junit.jupiter.api.Test
+import java.util.UUID
 import kotlin.test.assertEquals
 
 class UserControllerTest {
@@ -27,7 +27,7 @@ class UserControllerTest {
 
     @Test
     fun `Test create user API endpoint`() {
-       val (controller,createUserUseCase,_, _) = getUserController()
+        val (controller, createUserUseCase, _, _) = getUserController()
 
         val request = CreateUserRequest(USER_NAME, EMAIL, PASSWORD)
         val user = User(id = userId, username = request.username, email = request.email, password = request.password)
@@ -45,7 +45,7 @@ class UserControllerTest {
 
     @Test
     fun `Test login API endpoint`() {
-        val (controller,_,jwtProvider, loginUseCase ) = getUserController()
+        val (controller, _, jwtProvider, loginUseCase) = getUserController()
         val request = LoginRequest(USER_NAME, PASSWORD)
         val authUserDTO = AuthUserDTO(id = userId, username = request.username, email = EMAIL)
 
@@ -61,9 +61,7 @@ class UserControllerTest {
         assertEquals(response, JWT_TOKEN)
     }
 
-
-
-    companion object{
+    companion object {
         const val USER_NAME = "user_name"
         const val PASSWORD = "secret"
         const val EMAIL = "test@test.com"

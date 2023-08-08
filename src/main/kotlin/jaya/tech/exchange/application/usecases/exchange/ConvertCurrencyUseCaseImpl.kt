@@ -1,14 +1,14 @@
 package jaya.tech.exchange.application.usecases.exchange
 
+import jaya.tech.exchange.application.domain.Exchange
+import jaya.tech.exchange.infra.adapters.Loggable
 import jaya.tech.exchange.ports.input.rest.dtos.ExchangeResponse
 import jaya.tech.exchange.ports.input.rest.dtos.toExchangeResponse
 import jaya.tech.exchange.ports.output.external.exchangeapi.ExchangeGateway
 import jaya.tech.exchange.ports.output.persistence.repositories.ExchangeRepository
-import jaya.tech.exchange.application.domain.Exchange
-import jaya.tech.exchange.infra.adapters.Loggable
 import java.lang.RuntimeException
 import java.math.BigDecimal
-import java.util.*
+import java.util.UUID
 
 class ConvertCurrencyUseCaseImpl(
     private val exchangeGateway: ExchangeGateway,

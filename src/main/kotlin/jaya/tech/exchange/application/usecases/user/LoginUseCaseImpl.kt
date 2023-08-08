@@ -1,9 +1,19 @@
 package jaya.tech.exchange.application.usecases.user
 
+import jaya.tech.exchange.infra.adapters.Loggable
 import jaya.tech.exchange.ports.input.rest.dtos.AuthUserDTO
+import jaya.tech.exchange.ports.output.persistence.entities.toAuthUserDTO
+import jaya.tech.exchange.ports.output.persistence.repositories.UserRepository
 
-class LoginUseCaseImpl(): LoginUseCase {
-    override fun execute(userName: String, password: String): AuthUserDTO{
-        throw Exception("Not implemented yet")
+class LoginUseCaseImpl(private val userRepository: UserRepository) : LoginUseCase, Loggable {
+    override fun execute(userName: String, password: String): AuthUserDTO =
+        userRepository.getUserByUsernameAndPassword(userName, password)?.let {
+            it.toAuthUserDTO().also { _ ->
+                log.info("User ${it.username} logged in")
+            }
+        } ?: throw Exception(INVALID_CREDENTIALS_MESSAGE)
+
+    companion object {
+        const val INVALID_CREDENTIALS_MESSAGE = "Your Credentials are invalid!"
     }
 }
