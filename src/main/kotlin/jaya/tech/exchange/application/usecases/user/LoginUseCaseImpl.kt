@@ -11,7 +11,9 @@ class LoginUseCaseImpl(private val userRepository: UserRepository) : LoginUseCas
             it.toAuthUserDTO().also { _ ->
                 log.info("User ${it.username} logged in")
             }
-        } ?: throw Exception(INVALID_CREDENTIALS_MESSAGE)
+        } ?: throw Exception(INVALID_CREDENTIALS_MESSAGE).also { ex ->
+            log.error(INVALID_CREDENTIALS_MESSAGE, ex)
+        }
 
     companion object {
         const val INVALID_CREDENTIALS_MESSAGE = "Your Credentials are invalid!"
