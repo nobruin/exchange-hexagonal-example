@@ -14,7 +14,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
 import java.util.UUID
 
-object UsersTable : Table() {
+object Users : Table() {
     val id = uuid("id").autoGenerate()
     val username = varchar("username", 50).uniqueIndex()
     val email = varchar("email", 100)
@@ -22,17 +22,17 @@ object UsersTable : Table() {
     override val primaryKey = PrimaryKey(id)
 }
 fun ResultRow.toUserModel() = UserModel(
-    id = this[UsersTable.id],
-    username = this[UsersTable.username],
-    email = this[UsersTable.email],
-    password = this[UsersTable.password]
+    id = this[Users.id],
+    username = this[Users.username],
+    email = this[Users.email],
+    password = this[Users.password]
 )
 
 class UserRepositoryImpl(private val database: Database) : UserRepository {
 
     init {
         transaction(database) {
-            SchemaUtils.create(UsersTable)
+            SchemaUtils.create(Users)
         }
     }
 
@@ -44,7 +44,7 @@ class UserRepositoryImpl(private val database: Database) : UserRepository {
 
     override fun getUserByUsername(username: String): UserModel? {
         return transaction(database) {
-            UsersTable.select { UsersTable.username eq username }
+            Users.select { Users.username eq username }
                 .mapNotNull { row -> row.toUserModel() }
                 .singleOrNull()
         }
@@ -52,7 +52,7 @@ class UserRepositoryImpl(private val database: Database) : UserRepository {
 
     override fun getUserByUsernameAndPassword(username: String, password: String): UserModel? {
         return transaction(database) {
-            UsersTable.select { (UsersTable.username eq username) and (UsersTable.password eq password) }
+            Users.select { (Users.username eq username) and (Users.password eq password) }
                 .mapNotNull { row -> row.toUserModel() }
                 .singleOrNull()
         }
@@ -60,7 +60,7 @@ class UserRepositoryImpl(private val database: Database) : UserRepository {
 
     override fun getById(userId: UUID): UserModel =
         transaction(database) {
-            UsersTable.select { UsersTable.id eq userId }
+            Users.select { Users.id eq userId }
                 .map { it.toUserModel() }
                 .singleOrNull()
                 ?: throw NoSuchElementException("User not found with ID $userId")
@@ -70,7 +70,7 @@ class UserRepositoryImpl(private val database: Database) : UserRepository {
         val userId = UUID.randomUUID()
         runCatching {
             transaction(database) {
-                UsersTable.insert {
+                Users.insert {
                     it[id] = userId
                     it[username] = user.username
                     it[email] = user.email
@@ -86,7 +86,7 @@ class UserRepositoryImpl(private val database: Database) : UserRepository {
     private fun update(userId: UUID, user: User): UserModel {
         runCatching {
             transaction(database) {
-                UsersTable.update({ UsersTable.id eq userId }) {
+                Users.update({ Users.id eq userId }) {
                     it[username] = user.username
                     it[email] = user.email
                 }

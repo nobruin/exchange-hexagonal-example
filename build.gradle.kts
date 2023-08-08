@@ -2,13 +2,13 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val fuel = "2.3.1"
 val mockVersion = "1.13.5"
 val jacksonVersion = "2.15.2"
-var slf4jVersion = "2.0.7"
-var jsonTokenVersion = "0.11.2"
-var javalinVersion = "5.6.1"
-var koinVersion = "3.1.2"
-var exposedVersion = "0.42.0"
-var sqliteVersion = "3.42.0.0"
-var h2Version = "2.2.220"
+val slf4jVersion = "2.0.7"
+val jsonTokenVersion = "0.11.2"
+val javalinVersion = "5.6.1"
+val koinVersion = "3.1.2"
+val exposedVersion = "0.42.0"
+val sqliteVersion = "3.42.0.0"
+val h2Version = "2.2.220"
 
 plugins {
     id("com.google.devtools.ksp") version "1.9.0-1.0.11"
@@ -42,7 +42,6 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion") // JDBC dependency
     implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
-    implementation("org.xerial:sqlite-jdbc:$sqliteVersion")
     implementation("com.h2database:h2:$h2Version")
 
     testImplementation(kotlin("test"))

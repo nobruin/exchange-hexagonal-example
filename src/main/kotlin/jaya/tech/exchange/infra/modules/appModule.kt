@@ -16,15 +16,14 @@ import jaya.tech.exchange.ports.output.external.exchangeapi.ExchangeGateway
 import jaya.tech.exchange.ports.output.persistence.repositories.UserRepository
 import org.jetbrains.exposed.sql.Database
 import org.koin.dsl.module
-import org.sqlite.SQLiteDataSource
 
 var appModule = module {
+    single<UserRepository> { UserRepositoryImpl(get()) }
     single<ExchangeGateway> { ExchangeApiGatewayImpl(get()) }
     single<CreateUserUseCase> { CreateUserUseCaseIMpl(get()) }
-    factory<JwtTokenProvider> { JwtTokenProviderImpl() }
     single<LoginUseCase> { LoginUseCaseImpl(get()) }
-    single<UserRepository> { UserRepositoryImpl(get()) }
     single<ConvertCurrencyUseCase> { ConvertCurrencyUseCaseImpl(get(), get()) }
+    factory<JwtTokenProvider> { JwtTokenProviderImpl() }
     factory { ExchangeController(get(), get()) }
     factory { UserController(get(), get(), get()) }
 }
@@ -32,9 +31,7 @@ var appModule = module {
 var databaseModule = module {
     single {
         Database.connect(
-            SQLiteDataSource().apply {
-                url = System.getenv("DATABASE_PATH")
-            }
+            "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;", driver = "org.h2.Driver"
         )
     }
 }
