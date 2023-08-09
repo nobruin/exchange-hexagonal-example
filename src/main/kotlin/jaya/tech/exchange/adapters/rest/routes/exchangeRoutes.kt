@@ -1,4 +1,4 @@
-package jaya.tech.exchange.ports.input.rest.routes
+package jaya.tech.exchange.adapters.rest.routes
 
 import io.javalin.Javalin
 

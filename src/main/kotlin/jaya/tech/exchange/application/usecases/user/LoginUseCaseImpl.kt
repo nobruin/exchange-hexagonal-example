@@ -1,7 +1,7 @@
 package jaya.tech.exchange.application.usecases.user
 
-import jaya.tech.exchange.infra.adapters.Loggable
-import jaya.tech.exchange.ports.input.rest.dtos.AuthUserDTO
+import jaya.tech.exchange.adapters.rest.dtos.AuthUserDTO
+import jaya.tech.exchange.infra.Loggable
 import jaya.tech.exchange.ports.output.persistence.entities.toAuthUserDTO
 import jaya.tech.exchange.ports.output.persistence.repositories.UserRepository
 

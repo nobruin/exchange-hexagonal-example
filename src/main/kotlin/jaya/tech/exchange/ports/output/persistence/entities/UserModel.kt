@@ -1,6 +1,6 @@
 package jaya.tech.exchange.ports.output.persistence.entities
 
-import jaya.tech.exchange.ports.input.rest.dtos.AuthUserDTO
+import jaya.tech.exchange.adapters.rest.dtos.AuthUserDTO
 import java.util.UUID
 
 data class UserModel(

@@ -1,9 +1,9 @@
 package jaya.tech.exchange.application.usecases.exchange
 
+import jaya.tech.exchange.adapters.rest.dtos.ExchangeResponse
+import jaya.tech.exchange.adapters.rest.dtos.toExchangeResponse
 import jaya.tech.exchange.application.domain.Exchange
-import jaya.tech.exchange.infra.adapters.Loggable
-import jaya.tech.exchange.ports.input.rest.dtos.ExchangeResponse
-import jaya.tech.exchange.ports.input.rest.dtos.toExchangeResponse
+import jaya.tech.exchange.infra.Loggable
 import jaya.tech.exchange.ports.output.external.exchangeapi.ExchangeGateway
 import jaya.tech.exchange.ports.output.persistence.repositories.ExchangeRepository
 import java.lang.RuntimeException

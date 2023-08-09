@@ -1,8 +1,8 @@
-package jaya.tech.exchange.infra.adapters.apiclient
+package jaya.tech.exchange.infra.apiclient
 
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.gson.responseObject
-import jaya.tech.exchange.infra.adapters.Loggable
+import jaya.tech.exchange.infra.Loggable
 import jaya.tech.exchange.ports.output.external.exchangeapi.ExchangeGateway
 import jaya.tech.exchange.ports.output.external.exchangeapi.entities.ExchangeResult
 

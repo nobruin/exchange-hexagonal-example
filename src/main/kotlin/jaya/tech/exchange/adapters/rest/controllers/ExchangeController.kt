@@ -1,8 +1,8 @@
-package jaya.tech.exchange.ports.input.rest.controllers
+package jaya.tech.exchange.adapters.rest.controllers
 
+import jaya.tech.exchange.adapters.rest.dtos.ExchangeRequest
+import jaya.tech.exchange.adapters.rest.dtos.ExchangeResponse
 import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCase
-import jaya.tech.exchange.ports.input.rest.dtos.ExchangeRequest
-import jaya.tech.exchange.ports.input.rest.dtos.ExchangeResponse
 import jaya.tech.exchange.ports.output.authentication.JwtTokenProvider
 
 class ExchangeController(

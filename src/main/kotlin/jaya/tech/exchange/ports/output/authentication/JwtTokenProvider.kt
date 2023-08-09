@@ -1,6 +1,6 @@
 package jaya.tech.exchange.ports.output.authentication
 
-import jaya.tech.exchange.ports.input.rest.dtos.AuthUserDTO
+import jaya.tech.exchange.adapters.rest.dtos.AuthUserDTO
 
 interface JwtTokenProvider {
     fun createToken(user: AuthUserDTO): String

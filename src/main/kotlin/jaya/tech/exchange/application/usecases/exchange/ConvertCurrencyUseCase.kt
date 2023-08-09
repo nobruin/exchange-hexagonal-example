@@ -1,6 +1,6 @@
 package jaya.tech.exchange.application.usecases.exchange
 
-import jaya.tech.exchange.ports.input.rest.dtos.ExchangeResponse
+import jaya.tech.exchange.adapters.rest.dtos.ExchangeResponse
 import java.math.BigDecimal
 import java.util.UUID
 

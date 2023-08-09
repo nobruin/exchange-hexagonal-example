@@ -1,4 +1,4 @@
-package jaya.tech.exchange.ports.input.rest.dtos
+package jaya.tech.exchange.adapters.rest.dtos
 
 import java.math.BigDecimal
 import java.util.UUID

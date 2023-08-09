@@ -1,4 +1,4 @@
-package jaya.tech.exchange.infra.adapters.database
+package jaya.tech.exchange.infra.database
 
 import jaya.tech.exchange.application.domain.User
 import jaya.tech.exchange.ports.output.persistence.entities.UserModel

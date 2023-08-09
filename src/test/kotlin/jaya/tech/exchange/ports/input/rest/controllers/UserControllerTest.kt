@@ -2,12 +2,13 @@ package jaya.tech.exchange.ports.input.rest.controllers
 
 import io.mockk.every
 import io.mockk.mockk
+import jaya.tech.exchange.adapters.rest.controllers.UserController
+import jaya.tech.exchange.adapters.rest.dtos.AuthUserDTO
+import jaya.tech.exchange.adapters.rest.dtos.CreateUserRequest
+import jaya.tech.exchange.adapters.rest.dtos.LoginRequest
 import jaya.tech.exchange.application.domain.User
 import jaya.tech.exchange.application.usecases.user.CreateUserUseCase
 import jaya.tech.exchange.application.usecases.user.LoginUseCase
-import jaya.tech.exchange.ports.input.rest.dtos.AuthUserDTO
-import jaya.tech.exchange.ports.input.rest.dtos.CreateUserRequest
-import jaya.tech.exchange.ports.input.rest.dtos.LoginRequest
 import jaya.tech.exchange.ports.output.authentication.JwtTokenProvider
 import org.junit.jupiter.api.Test
 import java.util.UUID

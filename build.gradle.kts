@@ -9,6 +9,8 @@ val koinVersion = "3.1.2"
 val exposedVersion = "0.42.0"
 val sqliteVersion = "3.42.0.0"
 val h2Version = "2.2.220"
+val hibernateValidator = "8.0.1.Final"
+val javaxValidationVersion = "2.0.1.Final"
 
 plugins {
     id("com.google.devtools.ksp") version "1.9.0-1.0.11"
@@ -37,7 +39,8 @@ dependencies {
     implementation("io.javalin:javalin:$javalinVersion")
     implementation("org.slf4j:slf4j-simple:$slf4jVersion")
     implementation("io.insert-koin:koin-core:$koinVersion")
-
+    implementation("org.hibernate:hibernate-validator:$hibernateValidator")
+    implementation("javax.validation:validation-api:$javaxValidationVersion")
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion") // JDBC dependency

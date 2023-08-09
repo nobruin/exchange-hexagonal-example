@@ -1,4 +1,4 @@
-package jaya.tech.exchange.infra.adapters
+package jaya.tech.exchange.infra
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

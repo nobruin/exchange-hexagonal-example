@@ -1,4 +1,4 @@
-package jaya.tech.exchange.ports.input.rest.dtos
+package jaya.tech.exchange.adapters.rest.dtos
 
 import jaya.tech.exchange.ports.output.persistence.entities.ExchangeModel
 import java.math.BigDecimal

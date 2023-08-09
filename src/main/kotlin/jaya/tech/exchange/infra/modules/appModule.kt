@@ -1,16 +1,16 @@
 package jaya.tech.exchange.infra.modules
 
+import jaya.tech.exchange.adapters.rest.controllers.ExchangeController
+import jaya.tech.exchange.adapters.rest.controllers.UserController
 import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCase
 import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCaseImpl
 import jaya.tech.exchange.application.usecases.user.CreateUserUseCase
 import jaya.tech.exchange.application.usecases.user.CreateUserUseCaseIMpl
 import jaya.tech.exchange.application.usecases.user.LoginUseCase
 import jaya.tech.exchange.application.usecases.user.LoginUseCaseImpl
-import jaya.tech.exchange.infra.adapters.apiclient.ExchangeApiGatewayImpl
-import jaya.tech.exchange.infra.adapters.authentication.JwtTokenProviderImpl
-import jaya.tech.exchange.infra.adapters.database.UserRepositoryImpl
-import jaya.tech.exchange.ports.input.rest.controllers.ExchangeController
-import jaya.tech.exchange.ports.input.rest.controllers.UserController
+import jaya.tech.exchange.infra.apiclient.ExchangeApiGatewayImpl
+import jaya.tech.exchange.infra.authentication.JwtTokenProviderImpl
+import jaya.tech.exchange.infra.database.UserRepositoryImpl
 import jaya.tech.exchange.ports.output.authentication.JwtTokenProvider
 import jaya.tech.exchange.ports.output.external.exchangeapi.ExchangeGateway
 import jaya.tech.exchange.ports.output.persistence.repositories.UserRepository

@@ -1,12 +1,17 @@
-package jaya.tech.exchange.ports.input.rest.routes
+package jaya.tech.exchange.adapters.rest.routes
 
 import io.javalin.Javalin
 import io.javalin.http.bodyValidator
-import jaya.tech.exchange.ports.input.rest.controllers.UserController
-import jaya.tech.exchange.ports.input.rest.dtos.CreateUserRequest
-import jaya.tech.exchange.ports.input.rest.dtos.LoginRequest
+import io.javalin.validation.ValidationError
+import jaya.tech.exchange.adapters.rest.controllers.UserController
+import jaya.tech.exchange.adapters.rest.dtos.CreateUserRequest
+import jaya.tech.exchange.adapters.rest.dtos.LoginRequest
+import jaya.tech.exchange.application.exceptions.BadRequestException
 import org.koin.java.KoinJavaComponent
 
+fun buildErrorMessage(violations: Map<String, List<ValidationError<Any>>>): String {
+    return violations.values.flatten().joinToString(", ") { it.message }
+}
 fun Javalin.userRoutes(version: String) {
     val userController: UserController by KoinJavaComponent.inject(UserController::class.java)
     post("$version/users") { ctx ->
@@ -14,7 +19,9 @@ fun Javalin.userRoutes(version: String) {
             .check({ it.username.isNotBlank() }, "Username is required")
             .check({ it.email.isNotBlank() }, "Email is required")
             .check({ it.password.isNotBlank() }, "Password is required")
-            .get()
+            .getOrThrow {
+                BadRequestException(buildErrorMessage(it))
+            }
 
         userController.createUser(createUserRequest).let {
             ctx.status(200)
@@ -26,7 +33,9 @@ fun Javalin.userRoutes(version: String) {
         val loginRequest = ctx.bodyValidator<LoginRequest>()
             .check({ it.username.isNotBlank() }, "Username is required")
             .check({ it.password.isNotBlank() }, "Password is required")
-            .get()
+            .getOrThrow {
+                BadRequestException(buildErrorMessage(it))
+            }
 
         userController.login(loginRequest).let {
             ctx.status(200)
