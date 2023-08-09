@@ -10,10 +10,3 @@ class CreateUserRequest(
     @field:NotBlank(message = "Password is required")
     val password: String
 )
-
-object ObjectValidation {
-    fun <T> getValidator(): javax.validation.Validator {
-        val factory = javax.validation.Validation.buildDefaultValidatorFactory()
-        return factory.validator
-    }
-}
