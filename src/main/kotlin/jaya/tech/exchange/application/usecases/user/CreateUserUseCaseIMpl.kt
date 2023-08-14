@@ -3,6 +3,7 @@ package jaya.tech.exchange.application.usecases.user
 import jaya.tech.exchange.application.domain.User
 import jaya.tech.exchange.application.domain.toEntity
 import jaya.tech.exchange.infra.Loggable
+import jaya.tech.exchange.ports.input.usecases.user.CreateUserUseCase
 import jaya.tech.exchange.ports.output.persistence.repositories.UserRepository
 
 class CreateUserUseCaseIMpl(private val userRepository: UserRepository) : CreateUserUseCase, Loggable {

@@ -1,4 +1,4 @@
-package jaya.tech.exchange.application.usecases.exchange
+package jaya.tech.exchange.ports.input.usecases.exchange
 
 import jaya.tech.exchange.adapters.rest.dtos.ExchangeResponse
 import java.math.BigDecimal

@@ -1,4 +1,4 @@
-package jaya.tech.exchange.application.usecases.user
+package jaya.tech.exchange.ports.input.usecases.user
 
 import jaya.tech.exchange.application.domain.User
 

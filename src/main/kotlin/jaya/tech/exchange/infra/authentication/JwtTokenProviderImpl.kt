@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import jaya.tech.exchange.adapters.rest.dtos.AuthUserDTO
-import jaya.tech.exchange.ports.output.authentication.JwtTokenProvider
+import jaya.tech.exchange.ports.input.authentication.JwtTokenProvider
 import java.security.SecureRandom
 import java.util.Date
 import java.util.UUID

@@ -6,8 +6,8 @@ import jaya.tech.exchange.adapters.rest.controllers.ExchangeController
 import jaya.tech.exchange.adapters.rest.dtos.AuthUserDTO
 import jaya.tech.exchange.adapters.rest.dtos.ExchangeRequest
 import jaya.tech.exchange.adapters.rest.dtos.ExchangeResponse
-import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCase
-import jaya.tech.exchange.ports.output.authentication.JwtTokenProvider
+import jaya.tech.exchange.ports.input.usecases.exchange.ConvertCurrencyUseCase
+import jaya.tech.exchange.ports.input.authentication.JwtTokenProvider
 import org.junit.jupiter.api.assertThrows
 import java.util.UUID
 import kotlin.test.Test

@@ -2,8 +2,9 @@ package jaya.tech.exchange.adapters.rest.controllers
 
 import jaya.tech.exchange.adapters.rest.dtos.ExchangeRequest
 import jaya.tech.exchange.adapters.rest.dtos.ExchangeResponse
-import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCase
-import jaya.tech.exchange.ports.output.authentication.JwtTokenProvider
+import jaya.tech.exchange.application.exceptions.UnauthorizedException
+import jaya.tech.exchange.ports.input.usecases.exchange.ConvertCurrencyUseCase
+import jaya.tech.exchange.ports.input.authentication.JwtTokenProvider
 
 class ExchangeController(
     private val convertCurrencyUseCase: ConvertCurrencyUseCase,
@@ -20,7 +21,7 @@ class ExchangeController(
                 )
             }
         }.onFailure {
-            throw Exception(INVALID_TOKEN)
+            throw UnauthorizedException(INVALID_TOKEN)
         }.getOrThrow()
 
     companion object {

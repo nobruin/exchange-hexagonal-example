@@ -9,6 +9,7 @@ import jaya.tech.exchange.ports.output.persistence.repositories.ExchangeReposito
 import java.lang.RuntimeException
 import java.math.BigDecimal
 import java.util.UUID
+import jaya.tech.exchange.ports.input.usecases.exchange.ConvertCurrencyUseCase
 
 class ConvertCurrencyUseCaseImpl(
     private val exchangeGateway: ExchangeGateway,

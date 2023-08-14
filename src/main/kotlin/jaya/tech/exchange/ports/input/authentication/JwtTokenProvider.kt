@@ -1,4 +1,4 @@
-package jaya.tech.exchange.ports.output.authentication
+package jaya.tech.exchange.ports.input.authentication
 
 import jaya.tech.exchange.adapters.rest.dtos.AuthUserDTO
 
