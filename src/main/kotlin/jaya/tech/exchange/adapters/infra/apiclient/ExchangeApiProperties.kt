@@ -1,4 +1,4 @@
-package jaya.tech.exchange.infra.apiclient
+package jaya.tech.exchange.adapters.infra.apiclient
 
 class ExchangeApiProperties {
     var uri: String = System.getenv("EXCHANGE_API_URI")

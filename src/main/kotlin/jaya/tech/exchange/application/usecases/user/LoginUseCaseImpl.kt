@@ -1,9 +1,9 @@
 package jaya.tech.exchange.application.usecases.user
 
 import jaya.tech.exchange.adapters.rest.dtos.AuthUserDTO
-import jaya.tech.exchange.infra.Loggable
+import jaya.tech.exchange.adapters.rest.dtos.toAuthUserDTO
+import jaya.tech.exchange.application.Loggable
 import jaya.tech.exchange.ports.input.usecases.user.LoginUseCase
-import jaya.tech.exchange.ports.output.persistence.entities.toAuthUserDTO
 import jaya.tech.exchange.ports.output.persistence.repositories.UserRepository
 
 class LoginUseCaseImpl(private val userRepository: UserRepository) : LoginUseCase, Loggable {

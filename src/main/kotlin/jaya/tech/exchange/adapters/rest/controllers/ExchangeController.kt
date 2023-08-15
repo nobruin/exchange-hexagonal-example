@@ -3,8 +3,8 @@ package jaya.tech.exchange.adapters.rest.controllers
 import jaya.tech.exchange.adapters.rest.dtos.ExchangeRequest
 import jaya.tech.exchange.adapters.rest.dtos.ExchangeResponse
 import jaya.tech.exchange.application.exceptions.UnauthorizedException
-import jaya.tech.exchange.ports.input.usecases.exchange.ConvertCurrencyUseCase
 import jaya.tech.exchange.ports.input.authentication.JwtTokenProvider
+import jaya.tech.exchange.ports.input.usecases.exchange.ConvertCurrencyUseCase
 
 class ExchangeController(
     private val convertCurrencyUseCase: ConvertCurrencyUseCase,

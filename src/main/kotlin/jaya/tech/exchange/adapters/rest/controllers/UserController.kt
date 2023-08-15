@@ -4,9 +4,9 @@ import jaya.tech.exchange.adapters.rest.dtos.CreateUserRequest
 import jaya.tech.exchange.adapters.rest.dtos.CreateUserResponse
 import jaya.tech.exchange.adapters.rest.dtos.LoginRequest
 import jaya.tech.exchange.application.exceptions.UnauthorizedException
+import jaya.tech.exchange.ports.input.authentication.JwtTokenProvider
 import jaya.tech.exchange.ports.input.usecases.user.CreateUserUseCase
 import jaya.tech.exchange.ports.input.usecases.user.LoginUseCase
-import jaya.tech.exchange.ports.input.authentication.JwtTokenProvider
 
 class UserController(
     private val createUserUseCase: CreateUserUseCase,

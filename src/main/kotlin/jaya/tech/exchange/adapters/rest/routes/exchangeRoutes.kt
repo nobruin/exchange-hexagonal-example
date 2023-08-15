@@ -3,7 +3,6 @@ package jaya.tech.exchange.adapters.rest.routes
 import io.javalin.Javalin
 import io.javalin.http.bodyValidator
 import jaya.tech.exchange.adapters.rest.controllers.ExchangeController
-
 import jaya.tech.exchange.adapters.rest.dtos.ExchangeRequest
 import jaya.tech.exchange.application.exceptions.BadRequestException
 import org.koin.java.KoinJavaComponent

@@ -1,4 +1,4 @@
-package jaya.tech.exchange.infra.authentication
+package jaya.tech.exchange.adapters.infra.authentication
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts

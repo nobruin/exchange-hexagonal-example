@@ -1,4 +1,4 @@
-package jaya.tech.exchange.infra
+package jaya.tech.exchange.application
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

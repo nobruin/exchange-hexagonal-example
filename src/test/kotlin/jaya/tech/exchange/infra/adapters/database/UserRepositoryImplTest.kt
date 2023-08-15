@@ -1,8 +1,8 @@
 package jaya.tech.exchange.infra.adapters.database
 
+import jaya.tech.exchange.adapters.infra.database.UserRepositoryImpl
 import jaya.tech.exchange.application.domain.User
 import jaya.tech.exchange.application.domain.toEntity
-import jaya.tech.exchange.infra.database.UserRepositoryImpl
 import org.jetbrains.exposed.sql.Database
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
