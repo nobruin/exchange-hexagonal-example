@@ -62,8 +62,8 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-//tasks.findByPath("ktlintCheck")?.dependsOn("ktlintFormat")
-//tasks.findByPath("compileKotlin")?.dependsOn("ktlintCheck")
+tasks.findByPath("ktlintCheck")?.dependsOn("ktlintFormat")
+tasks.findByPath("compileKotlin")?.dependsOn("ktlintCheck")
 
 application {
     mainClass.set("ApplicationKt")
