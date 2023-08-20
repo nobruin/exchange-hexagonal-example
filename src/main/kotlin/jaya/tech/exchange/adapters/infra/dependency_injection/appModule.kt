@@ -1,4 +1,4 @@
-package jaya.tech.exchange.adapters.infra.modules
+package jaya.tech.exchange.adapters.infra.dependency_injection
 
 import jaya.tech.exchange.adapters.infra.apiclient.ExchangeApiGatewayImpl
 import jaya.tech.exchange.adapters.infra.authentication.JwtTokenProviderImpl

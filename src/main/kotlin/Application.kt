@@ -1,6 +1,6 @@
 import io.javalin.Javalin
-import jaya.tech.exchange.adapters.infra.modules.appModule
-import jaya.tech.exchange.adapters.infra.modules.databaseModule
+import jaya.tech.exchange.adapters.infra.dependency_injection.appModule
+import jaya.tech.exchange.adapters.infra.dependency_injection.databaseModule
 import jaya.tech.exchange.adapters.rest.handleException
 import jaya.tech.exchange.adapters.rest.routes.exchangeRoutes
 import jaya.tech.exchange.adapters.rest.routes.userRoutes

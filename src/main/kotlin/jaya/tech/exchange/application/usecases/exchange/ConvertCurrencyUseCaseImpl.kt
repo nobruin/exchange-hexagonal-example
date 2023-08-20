@@ -10,6 +10,7 @@ import jaya.tech.exchange.ports.output.persistence.repositories.ExchangeReposito
 import java.lang.RuntimeException
 import java.math.BigDecimal
 import java.util.UUID
+import jaya.tech.exchange.application.exceptions.BadRequestException
 
 class ConvertCurrencyUseCaseImpl(
     private val exchangeGateway: ExchangeGateway,
@@ -37,10 +38,10 @@ class ConvertCurrencyUseCaseImpl(
 
     private fun calculateConversionRate(currency: Double?, destinyCurrency: Double?): BigDecimal? {
         when {
-            currency == null || currency <= 0.0 -> throw RuntimeException(BAD_REQUEST_EXCEPTION_MESSAGE).also {
+            currency == null || currency <= 0.0 -> throw BadRequestException(BAD_REQUEST_EXCEPTION_MESSAGE).also {
                 log.error(BAD_REQUEST_EXCEPTION_MESSAGE)
             }
-            destinyCurrency == null || destinyCurrency <= 0.0 -> throw RuntimeException(BAD_REQUEST_EXCEPTION_MESSAGE).also {
+            destinyCurrency == null || destinyCurrency <= 0.0 -> throw BadRequestException(BAD_REQUEST_EXCEPTION_MESSAGE).also {
                 log.error(BAD_REQUEST_EXCEPTION_MESSAGE)
             }
         }
@@ -48,14 +49,14 @@ class ConvertCurrencyUseCaseImpl(
     }
 
     private fun calculateAmount(amount: BigDecimal, rateConversion: BigDecimal?): BigDecimal {
-        rateConversion ?: throw RuntimeException(BAD_REQUEST_EXCEPTION_MESSAGE_RATE_NOT_FOUND).also {
-            log.error(BAD_REQUEST_EXCEPTION_MESSAGE_RATE_NOT_FOUND)
+        rateConversion ?: throw RuntimeException(RUNTIME_EXCEPTION_MESSAGE_RATE_NOT_FOUND).also {
+            log.error(RUNTIME_EXCEPTION_MESSAGE_RATE_NOT_FOUND)
         }
         return amount.let { rateConversion.times(it) }
     }
 
     companion object {
         const val BAD_REQUEST_EXCEPTION_MESSAGE = "values or Values is invalid for conversion"
-        const val BAD_REQUEST_EXCEPTION_MESSAGE_RATE_NOT_FOUND = "Rate of conversion not found"
+        const val RUNTIME_EXCEPTION_MESSAGE_RATE_NOT_FOUND = "Rate of conversion not found"
     }
 }
