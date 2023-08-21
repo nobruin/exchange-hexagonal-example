@@ -14,7 +14,7 @@ class ExchangeApiGatewayImpl(
     override fun getExchangeRate(fromCurrency: String, toCurrency: String): ExchangeResult = runCatching {
         val cacheKey = "$fromCurrency-$toCurrency"
         cache.get(cacheKey).let {
-            if(it != null){
+            if (it != null) {
                 return@runCatching it as ExchangeResult
             }
         }
@@ -30,7 +30,6 @@ class ExchangeApiGatewayImpl(
         log.error("Error on find rates", error)
         throw error
     }.getOrThrow()
-
 
     companion object {
         const val ACCESS_KEY = "access_key"

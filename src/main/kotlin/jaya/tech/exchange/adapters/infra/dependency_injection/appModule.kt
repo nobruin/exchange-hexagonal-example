@@ -1,8 +1,8 @@
 package jaya.tech.exchange.adapters.infra.dependency_injection
 
-import jaya.tech.exchange.adapters.infra.external.ExchangeApiGatewayImpl
 import jaya.tech.exchange.adapters.infra.authentication.JwtTokenProviderImpl
 import jaya.tech.exchange.adapters.infra.database.UserRepositoryImpl
+import jaya.tech.exchange.adapters.infra.external.ExchangeApiGatewayImpl
 import jaya.tech.exchange.adapters.infra.external.ServiceCacheImpl
 import jaya.tech.exchange.adapters.rest.controllers.ExchangeController
 import jaya.tech.exchange.adapters.rest.controllers.UserController

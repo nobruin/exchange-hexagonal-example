@@ -33,7 +33,7 @@ dependencies {
     // web client
     implementation("com.github.kittinunf.fuel:fuel:$fuel")
     implementation("com.github.kittinunf.fuel:fuel-gson:$fuel")
-    //logging
+    // logging
     implementation("org.slf4j:slf4j-api:$slf4jVersion")
     implementation("org.slf4j:slf4j-simple:$slf4jVersion")
 
@@ -47,14 +47,14 @@ dependencies {
     implementation("javax.validation:validation-api:$javaxValidationVersion")
     implementation("com.github.ben-manes.caffeine:caffeine:$caffeineVersion")
 
-    //database
+    // database
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion") // JDBC dependency
     implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
     implementation("com.h2database:h2:$h2Version")
 
-    //test
+    // test
     testImplementation(kotlin("test"))
     testImplementation("io.mockk:mockk:$mockVersion")
 }
