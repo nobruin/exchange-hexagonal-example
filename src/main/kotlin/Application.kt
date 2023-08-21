@@ -1,3 +1,4 @@
+import io.github.cdimascio.dotenv.dotenv
 import io.javalin.Javalin
 import jaya.tech.exchange.adapters.infra.dependency_injection.appModule
 import jaya.tech.exchange.adapters.infra.dependency_injection.databaseModule
@@ -9,12 +10,13 @@ import org.koin.core.context.startKoin
 
 class Application : Loggable {
     fun start() {
+        val env = dotenv()
         log.info("Starting application")
         startKoin {
             modules(databaseModule, appModule)
         }
         Javalin.create().start(
-            System.getenv("API_PORT").toInt()
+            env["API_PORT"]?.toInt() ?: 7000
         ).apply {
             routes {
                 userRoutes(API_VERSION)

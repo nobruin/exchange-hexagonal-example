@@ -12,6 +12,7 @@ val h2Version = "2.2.220"
 val hibernateValidator = "8.0.1.Final"
 val javaxValidationVersion = "2.0.1.Final"
 val caffeineVersion = "3.1.8"
+val dotenvVersion = "6.4.1"
 
 plugins {
     id("com.google.devtools.ksp") version "1.9.0-1.0.11"
@@ -46,14 +47,13 @@ dependencies {
     implementation("org.hibernate:hibernate-validator:$hibernateValidator")
     implementation("javax.validation:validation-api:$javaxValidationVersion")
     implementation("com.github.ben-manes.caffeine:caffeine:$caffeineVersion")
-
+    implementation("io.github.cdimascio:dotenv-kotlin:$dotenvVersion")
     // database
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion") // JDBC dependency
     implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
     implementation("com.h2database:h2:$h2Version")
-
     // test
     testImplementation(kotlin("test"))
     testImplementation("io.mockk:mockk:$mockVersion")
