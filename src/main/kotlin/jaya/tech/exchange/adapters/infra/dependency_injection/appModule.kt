@@ -1,5 +1,6 @@
 package jaya.tech.exchange.adapters.infra.dependency_injection
 
+import io.github.cdimascio.dotenv.dotenv
 import jaya.tech.exchange.adapters.infra.authentication.JwtTokenProviderImpl
 import jaya.tech.exchange.adapters.infra.database.UserRepositoryImpl
 import jaya.tech.exchange.adapters.infra.external.ExchangeApiGatewayImpl
@@ -27,6 +28,7 @@ var appModule = module {
     factory<JwtTokenProvider> { JwtTokenProviderImpl() }
     factory { ExchangeController(get(), get()) }
     factory { UserController(get(), get(), get()) }
+    single { dotenv() }
 }
 
 var databaseModule = module {
