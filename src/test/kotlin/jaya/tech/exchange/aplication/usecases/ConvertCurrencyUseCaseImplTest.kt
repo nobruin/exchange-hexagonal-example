@@ -23,7 +23,7 @@ class ConvertCurrencyUseCaseImplTest {
         val exchangeRepository: ExchangeRepository = mockk<ExchangeRepository>()
         val useCase = ConvertCurrencyUseCaseImpl(exchangeGateway, exchangeRepository)
 
-        every { exchangeGateway.findRates(any(), any()) } throws RuntimeException("error")
+        every { exchangeGateway.getExchangeRate(any(), any()) } throws RuntimeException("error")
 
         assertThrows<RuntimeException> {
             useCase.execute(1.0.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, userId)
@@ -36,7 +36,7 @@ class ConvertCurrencyUseCaseImplTest {
         val exchangeRepository: ExchangeRepository = mockk<ExchangeRepository>()
         val useCase = ConvertCurrencyUseCaseImpl(exchangeGateway, exchangeRepository)
 
-        every { exchangeGateway.findRates("USD", "BRL") } returns ExchangeResult(
+        every { exchangeGateway.getExchangeRate("USD", "BRL") } returns ExchangeResult(
             success = EXCHANGE_STATUS,
             timestamp = TIMESTAMP,
             base = FROM_CURRENCY,
@@ -72,7 +72,7 @@ class ConvertCurrencyUseCaseImplTest {
             rates = mapOf(FROM_CURRENCY to 1.0, TO_CURRENCY to 5.0)
         )
 
-        every { exchangeGateway.findRates("USD", "BRL") } returns exchangeResult
+        every { exchangeGateway.getExchangeRate("USD", "BRL") } returns exchangeResult
         every { exchangeRepository.save(any()) } returns exchangeModel
 
         useCase.execute(AMOUNT_REQUESTED.toBigDecimal(), FROM_CURRENCY, TO_CURRENCY, userId).let { result ->

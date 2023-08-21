@@ -1,8 +1,9 @@
 package jaya.tech.exchange.adapters.infra.dependency_injection
 
-import jaya.tech.exchange.adapters.infra.apiclient.ExchangeApiGatewayImpl
+import jaya.tech.exchange.adapters.infra.external.ExchangeApiGatewayImpl
 import jaya.tech.exchange.adapters.infra.authentication.JwtTokenProviderImpl
 import jaya.tech.exchange.adapters.infra.database.UserRepositoryImpl
+import jaya.tech.exchange.adapters.infra.external.ServiceCacheImpl
 import jaya.tech.exchange.adapters.rest.controllers.ExchangeController
 import jaya.tech.exchange.adapters.rest.controllers.UserController
 import jaya.tech.exchange.application.usecases.exchange.ConvertCurrencyUseCaseImpl
@@ -18,11 +19,11 @@ import org.jetbrains.exposed.sql.Database
 import org.koin.dsl.module
 
 var appModule = module {
-    single<UserRepository> { UserRepositoryImpl(get()) }
-    single<ExchangeGateway> { ExchangeApiGatewayImpl(get()) }
-    single<CreateUserUseCase> { CreateUserUseCaseIMpl(get()) }
-    single<LoginUseCase> { LoginUseCaseImpl(get()) }
-    single<ConvertCurrencyUseCase> { ConvertCurrencyUseCaseImpl(get(), get()) }
+    factory<UserRepository> { UserRepositoryImpl(get()) }
+    factory<CreateUserUseCase> { CreateUserUseCaseIMpl(get()) }
+    factory<LoginUseCase> { LoginUseCaseImpl(get()) }
+    factory<ConvertCurrencyUseCase> { ConvertCurrencyUseCaseImpl(get(), get()) }
+    factory<ExchangeGateway> { ExchangeApiGatewayImpl(get(), ServiceCacheImpl()) }
     factory<JwtTokenProvider> { JwtTokenProviderImpl() }
     factory { ExchangeController(get(), get()) }
     factory { UserController(get(), get(), get()) }

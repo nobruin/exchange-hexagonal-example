@@ -11,6 +11,7 @@ val sqliteVersion = "3.42.0.0"
 val h2Version = "2.2.220"
 val hibernateValidator = "8.0.1.Final"
 val javaxValidationVersion = "2.0.1.Final"
+val caffeineVersion = "3.1.8"
 
 plugins {
     id("com.google.devtools.ksp") version "1.9.0-1.0.11"
@@ -29,24 +30,31 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
+    // web client
     implementation("com.github.kittinunf.fuel:fuel:$fuel")
     implementation("com.github.kittinunf.fuel:fuel-gson:$fuel")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+    //logging
     implementation("org.slf4j:slf4j-api:$slf4jVersion")
+    implementation("org.slf4j:slf4j-simple:$slf4jVersion")
+
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
     implementation("io.jsonwebtoken:jjwt-api:$jsonTokenVersion")
     implementation("io.jsonwebtoken:jjwt-jackson:$jsonTokenVersion")
     implementation("io.jsonwebtoken:jjwt-impl:$jsonTokenVersion")
     implementation("io.javalin:javalin:$javalinVersion")
-    implementation("org.slf4j:slf4j-simple:$slf4jVersion")
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("org.hibernate:hibernate-validator:$hibernateValidator")
     implementation("javax.validation:validation-api:$javaxValidationVersion")
+    implementation("com.github.ben-manes.caffeine:caffeine:$caffeineVersion")
+
+    //database
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion") // JDBC dependency
     implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
     implementation("com.h2database:h2:$h2Version")
 
+    //test
     testImplementation(kotlin("test"))
     testImplementation("io.mockk:mockk:$mockVersion")
 }

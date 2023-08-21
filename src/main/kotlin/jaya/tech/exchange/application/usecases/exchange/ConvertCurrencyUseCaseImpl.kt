@@ -18,7 +18,7 @@ class ConvertCurrencyUseCaseImpl(
 ) : ConvertCurrencyUseCase, Loggable {
     override fun execute(amount: BigDecimal, fromCurrency: String, toCurrency: String, userId: UUID): ExchangeResponse {
         log.info("convert currency from $fromCurrency to $toCurrency with amount $amount and userId $userId")
-        val exchangeResult = exchangeGateway.findRates(fromCurrency, toCurrency)
+        val exchangeResult = exchangeGateway.getExchangeRate(fromCurrency, toCurrency)
 
         val rateConversion =
             calculateConversionRate(exchangeResult.rates[fromCurrency], exchangeResult.rates[toCurrency])
