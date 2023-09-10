@@ -1,7 +1,7 @@
 name: exchange-api-ci (kotlin)
 on: [pull_request]
 jobs:
-  build:
+  check-application:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
