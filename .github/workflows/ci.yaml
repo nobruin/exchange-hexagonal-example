@@ -4,35 +4,35 @@ jobs:
   check-application:
     runs-on: ubuntu-latest
     steps:
-      # - uses: actions/checkout@v3
-      # - name: Set up Jdk 17
-      #   uses: actions/setup-java@v3
-      #   with:
-      #     java-version: '17'
-      #     distribution: 'temurin'
-      # - name: Validate Gradle wrapper
-      #   uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
+      - uses: actions/checkout@v3
+      - name: Set up Jdk 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
 
-      # - name: Test Gradle
-      #   uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
-      #   with:
-      #     arguments: test
+      - name: Test Gradle
+        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
+        with:
+          arguments: test
 
-      # - name: Build Gradle
-      #   uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
-      #   with:
-      #     arguments: build
+      - name: Build Gradle
+        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
+        with:
+          arguments: build
 
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: Package
-      #     path: build/libs
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Package
+          path: build/libs
 
-      # - name: Set up QEMU
-      #   uses: docker/setup-qemu-action@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
-      # - name: Set up Docker Buildx
-      #   uses: docker/setup-buildx-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
 
       - name: Login to DockerHub
@@ -41,9 +41,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # - name: Build and push
-      #   id: docker_build
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     push: false
-      #     tags: brunomarins/ci-kotlin:latest
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v5
+        with:
+          push: false
+          tags: brunomarins/ci-kotlin:latest
