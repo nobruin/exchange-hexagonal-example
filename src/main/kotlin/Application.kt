@@ -1,3 +1,4 @@
+
 import io.github.cdimascio.dotenv.dotenv
 import io.javalin.Javalin
 import jaya.tech.exchange.adapters.infra.dependency_injection.appModule
@@ -10,7 +11,11 @@ import org.koin.core.context.startKoin
 
 class Application : Loggable {
     fun start() {
-        val env = dotenv()
+        val env = dotenv {
+            directory = "assets"
+            filename = ".env"
+            ignoreIfMissing = true
+        }
         log.info("Starting application")
         startKoin {
             modules(databaseModule, appModule)

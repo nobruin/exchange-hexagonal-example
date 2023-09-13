@@ -17,6 +17,8 @@ val dotenvVersion = "6.4.1"
 plugins {
     id("com.google.devtools.ksp") version "1.9.0-1.0.11"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
+
     kotlin("jvm") version "1.9.0"
     application
     jacoco
@@ -75,4 +77,9 @@ tasks.findByPath("compileKotlin")?.dependsOn("ktlintCheck")
 
 application {
     mainClass.set("ApplicationKt")
+}
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "ApplicationKt"
+    }
 }
