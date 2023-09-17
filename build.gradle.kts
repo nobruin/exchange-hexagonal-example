@@ -82,4 +82,6 @@ tasks.withType<Jar> {
     manifest {
         attributes["Main-Class"] = "ApplicationKt"
     }
+
+    archiveFileName.set("app.jar")
 }
