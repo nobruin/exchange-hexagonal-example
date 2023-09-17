@@ -43,6 +43,16 @@ jobs:
           name: Package
           path: build/libs
 
+      - uses: actions/upload-artifact@master
+        with:
+          name: jar-file
+          path: app.jar
+
+      - uses: actions/download-artifact@master
+        with:
+          name: jar-file
+          path: app.jar
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
