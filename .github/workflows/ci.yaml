@@ -73,8 +73,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          push: false
-          tags: brunomarins/ci-kotlin:latest
+
+      - name: ls
+        run: ls -la
+
+#      - name: Build and push
+#        uses: docker/build-push-action@v5
+#        with:
+#          push: false
+#          tags: brunomarins/ci-kotlin:latest
