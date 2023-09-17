@@ -77,6 +77,10 @@ jobs:
       - name: ls
         run: ls -la
 
+      - name: docker build
+        run: docker build
+
+
 #      - name: Build and push
 #        uses: docker/build-push-action@v5
 #        with:
