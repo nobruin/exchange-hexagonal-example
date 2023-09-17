@@ -78,7 +78,7 @@ jobs:
         run: ls -la
 
       - name: docker build
-        run: docker build
+        run: docker build .
 
 
 #      - name: Build and push
