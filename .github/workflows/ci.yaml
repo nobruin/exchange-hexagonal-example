@@ -35,9 +35,9 @@ jobs:
           chmod +x ./gradlew
           ./gradlew build   
 
-#      - name: Copy Jar file
-#        run: mv build/libs/$(ls build/libs) app.jar
-#
+      - name: Copy Jar file
+        run: mv build/libs/$(ls build/libs) app.jar
+
       - uses: actions/upload-artifact@v2
         with:
           name: Package
