@@ -1,4 +1,7 @@
-FROM openjdk:17
-VOLUME /tmp
-EXPOSE 8080
-ADD /build/libs/*.jar spring-boot-docker-1.0.jar
+FROM openjdk:17-jdk-slim-buster
+WORKDIR /app
+EXPOSE 9000
+
+ADD  ./app.jar /app/app.jar
+
+CMD ["java", "-jar", "/app/app.jar"]

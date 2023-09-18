@@ -7,6 +7,6 @@ import org.koin.core.component.inject
 class ExchangeApiProperties : KoinComponent {
     private val env by inject<Dotenv>()
 
-    var uri: String = env["EXCHANGE_API_URI"]
-    var secret: String = env["EXCHANGE_API_SECRET"]
+    var uri: String? = env["EXCHANGE_API_URI"]
+    var secret: String? = env["EXCHANGE_API_SECRET"]
 }
