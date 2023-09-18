@@ -35,6 +35,7 @@ jobs:
           chmod +x ./gradlew
           ./gradlew build   
 
+      # TODO: improve this step
       - name: Copy Jar file
         run: cp build/libs/app.jar app.jar
 
@@ -77,12 +78,11 @@ jobs:
       - name: ls
         run: ls -la
 
-      - name: docker build
-        run: docker build .
+#      - name: docker build
+#        run: docker build .
 
-
-#      - name: Build and push
-#        uses: docker/build-push-action@v5
-#        with:
-#          push: false
-#          tags: brunomarins/ci-kotlin:latest
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: false
+          tags: brunomarins/ci-kotlin:latest
