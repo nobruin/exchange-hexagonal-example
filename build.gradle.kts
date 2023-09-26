@@ -18,6 +18,7 @@ plugins {
     id("com.google.devtools.ksp") version "1.9.0-1.0.11"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
     id("com.github.johnrengelman.shadow") version "7.0.0"
+    id("org.sonarqube") version "4.3.1.3277"
 
     kotlin("jvm") version "1.9.0"
     application
@@ -84,4 +85,12 @@ tasks.withType<Jar> {
     }
 
     archiveFileName.set("app.jar")
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "nobruin_exchange-hexagonal-example")
+        property("sonar.organization", "nobruin")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
 }

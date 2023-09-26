@@ -49,6 +49,12 @@ jobs:
           name: jar-file
           path: app.jar
 
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew build sonar --info
+
   build-docker-image:
 
     runs-on: ubuntu-latest
@@ -74,12 +80,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: ls
-        run: ls -la
-
-#      - name: docker build
-#        run: docker build .
 
       - name: Build and push
         uses: docker/build-push-action@v5
