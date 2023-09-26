@@ -1,3 +1,5 @@
+
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val fuel = "2.3.1"
 val mockVersion = "1.13.5"
@@ -16,6 +18,7 @@ val dotenvVersion = "6.4.1"
 
 plugins {
     id("com.google.devtools.ksp") version "1.9.0-1.0.11"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
     id("org.sonarqube") version "4.3.1.3277"
 
@@ -83,7 +86,7 @@ tasks.withType<Jar> {
         attributes["Main-Class"] = "ApplicationKt"
     }
 
-    archiveFileName.set("app.jar")
+    archiveFileName.set("${project.name}.jar")
 }
 
 sonar {
@@ -93,6 +96,13 @@ sonar {
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.exclusions", "**/build/**/*")
         property("sonar.coverage.jacoco.xmlReportPaths", "/build/reports/jacoco/test/jacocoTestReport.xml")
+    }
+}
+
+tasks.withType<ShadowJar> {
+    archiveFileName.set("app.jar")
+    manifest {
+        attributes["Main-Class"] = "ApplicationKt"
     }
 }
 
