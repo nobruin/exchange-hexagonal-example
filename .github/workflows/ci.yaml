@@ -33,9 +33,8 @@ jobs:
       - name: Execute Gradle build
         run: |
           chmod +x ./gradlew
-          ./gradlew build   
+          ./gradlew shadowJar   
 
-      # TODO: improve this step
       - name: Copy Jar file
         run: cp build/libs/app.jar app.jar
 
@@ -48,6 +47,24 @@ jobs:
         with:
           name: jar-file
           path: app.jar
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew build sonar --info
 
   build-docker-image:
 
@@ -74,12 +91,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: ls
-        run: ls -la
-
-#      - name: docker build
-#        run: docker build .
 
       - name: Build and push
         uses: docker/build-push-action@v5
